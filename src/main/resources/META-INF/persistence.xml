@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">org.sqlite.JDBC</property>
+        <property name="hibernate.connection.username"></property>
+        <property name="hibernate.connection.password"></property>
+        <property name="hibernate.dialect">configuration.databaseConfiguration.SQLiteDialect</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <mapping class="unit.Unit"/>
+        <mapping class="exam.Exam"/>
+        <mapping class="exam.examPercentage.ExamPercentage"/>
+        <mapping class="questionPackage.question.Question"/>
+        <mapping class="questionPackage.question.choose.Choose"/>
+        <mapping class="questionPackage.question.choose.choice.Choice"/>
+        <mapping class="questionPackage.question.complete.Complete"/>
+        <mapping class="questionPackage.question.connect.Connect"/>
+        <mapping class="questionPackage.question.connect.connectpair.ConnectPair"/>
+        <mapping class="questionPackage.question.mathproblem.MathProblem"/>
+        <mapping class="questionPackage.question.mathproblem.law.Law"/>
+        <mapping class="questionPackage.question.mathproblem.lawanswer.LawAnswer"/>
+        <mapping class="questionPackage.question.modelproblem.ModelProblem"/>
+        <mapping class="questionPackage.question.modelproblem.modelproblemdescription.ModelProblemDescription"/>
+        <mapping class="questionPackage.question.modelproblem.modelproblemanswer.ModelProblemAnswer"/>
+        <mapping class="questionPackage.question.trueorfalse.TrueOrFalse"/>
+    </session-factory>
+</hibernate-configuration>
