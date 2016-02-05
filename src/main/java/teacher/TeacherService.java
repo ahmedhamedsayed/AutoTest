@@ -76,7 +76,7 @@ public class TeacherService {
 			table.setWidthPercentage(50);
 			table.setWidths(columnWidths);
 			for (int i = 0; i < 3; ++i) {
-				String cellText = TeacherMessage.finalSheetHeader[i] + (i == 1 ? String.valueOf(exam.getMark()) : "");
+				String cellText = TeacherMessage.finalSheetHeader[i] + (i == 1 ? "[" + String.valueOf(exam.getMark()) + "]" : "");
 				PdfPCell cell = PDFCell.pdfCell(11, true, cellText, 20f);
 				table.addCell(cell);
 			}

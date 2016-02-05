@@ -2,41 +2,41 @@ package configuration.uiConfiguration;
 
 public class Message {
 
-	final static public String openDatabaseConnectionError = "خطأ أثناء محاولة الاتصال مع قاعدة البيانات";
+	final static public String openDatabaseConnectionError = "Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ù…Ø­Ø§ÙˆÙ„Ø© Ø§Ù„Ø§ØªØµØ§Ù„ Ù…Ø¹ Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª";
 
-	final static public String loadAllUnitsError = "خطأ أثناء محاولة قرأة بيانات الوحدات من قاعدة البيانات";
-	final static public String unitExistError = "أسم الوحده موجود في النظام";
-	final static public String findUnitIdError = "خطأ اثناء محاولة ايجاد الوحده  من قاعدة البيانات";
-	final static public String findUnitByDescriptionError = "خطأ اثناء محاولة ايجاد وحده بهذا الاسم من قاعدة البيانات";
-	final static public String saveUnitError = "خطأ أثناء محاولة حفظ الوحده في قاعدة البيانات";
-	final static public String selectUnitError = "أختر وحده";
-	final static public String updateUnitError = "خطأ أثناء محاولة تعديل الوحده في قاعدة البيانات";
-	final static public String deleteUnitError = "خطأ أثناء محاولة مسح الوحده من قاعدة البيانات";
-	final static public String findExamIdError = "خطأ اثناء محاولة ايجاد الامتحان  من قاعدة البيانات";
-	final static public String loadAllExamsError = "خطأ أثناء محاولة قرأة بيانات الامتحانات من قاعدة البيانات";
-	final static public String selectExamError = "أختر أمتحان";
-	final static public String deleteExamQuestionError = "خطأ أثناء محاولة مسح السؤال من داخل الامتحان";
-	final static public String addExamQuestionError = "خطأ أثناء محاولة اضافة سؤال للامتحان";
-	final static public String saveExamError = "خطأ أثناء محاولة حفظ الامتحان في قاعدة البيانات";
-	final static public String deleteExamError = "خطأ أثناء محاولة مسح الامتحان من قاعدة البيانات";
-	final static public String updateExamError = "خطأ أثناء محاولة تعديل الامتحان في قاعدة البيانات";
-	final static public String findQuestionByIdError = "خطأ اثناء محاولة ايجاد السؤال من قاعدة البيانات";
-	final static public String selectQuestionError = "أختر سؤال";
-	final static public String deleteQuestionError = "خطأ أثناء محاولة مسح السؤال من قاعدة البيانات";
+	final static public String loadAllUnitsError = "Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ù…Ø­Ø§ÙˆÙ„Ø© Ù‚Ø±Ø£Ø© Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ù„ÙˆØ­Ø¯Ø§Øª Ù…Ù† Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª";
+	final static public String unitExistError = "Ø£Ø³Ù… Ø§Ù„ÙˆØ­Ø¯Ù‡ Ù…ÙˆØ¬ÙˆØ¯ Ù�ÙŠ Ø§Ù„Ù†Ø¸Ø§Ù…";
+	final static public String findUnitIdError = "Ø®Ø·Ø£ Ø§Ø«Ù†Ø§Ø¡ Ù…Ø­Ø§ÙˆÙ„Ø© Ø§ÙŠØ¬Ø§Ø¯ Ø§Ù„ÙˆØ­Ø¯Ù‡  Ù…Ù† Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª";
+	final static public String findUnitByDescriptionError = "Ø®Ø·Ø£ Ø§Ø«Ù†Ø§Ø¡ Ù…Ø­Ø§ÙˆÙ„Ø© Ø§ÙŠØ¬Ø§Ø¯ ÙˆØ­Ø¯Ù‡ Ø¨Ù‡Ø°Ø§ Ø§Ù„Ø§Ø³Ù… Ù…Ù† Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª";
+	final static public String saveUnitError = "Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ù…Ø­Ø§ÙˆÙ„Ø© Ø­Ù�Ø¸ Ø§Ù„ÙˆØ­Ø¯Ù‡ Ù�ÙŠ Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª";
+	final static public String selectUnitError = "Ø£Ø®ØªØ± ÙˆØ­Ø¯Ù‡";
+	final static public String updateUnitError = "Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ù…Ø­Ø§ÙˆÙ„Ø© ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„ÙˆØ­Ø¯Ù‡ Ù�ÙŠ Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª";
+	final static public String deleteUnitError = "Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ù…Ø­Ø§ÙˆÙ„Ø© Ù…Ø³Ø­ Ø§Ù„ÙˆØ­Ø¯Ù‡ Ù…Ù† Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª";
+	final static public String findExamIdError = "Ø®Ø·Ø£ Ø§Ø«Ù†Ø§Ø¡ Ù…Ø­Ø§ÙˆÙ„Ø© Ø§ÙŠØ¬Ø§Ø¯ Ø§Ù„Ø§Ù…ØªØ­Ø§Ù†  Ù…Ù† Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª";
+	final static public String loadAllExamsError = "Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ù…Ø­Ø§ÙˆÙ„Ø© Ù‚Ø±Ø£Ø© Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ù„Ø§Ù…ØªØ­Ø§Ù†Ø§Øª Ù…Ù† Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª";
+	final static public String selectExamError = "Ø£Ø®ØªØ± Ø£Ù…ØªØ­Ø§Ù†";
+	final static public String deleteExamQuestionError = "Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ù…Ø­Ø§ÙˆÙ„Ø© Ù…Ø³Ø­ Ø§Ù„Ø³Ø¤Ø§Ù„ Ù…Ù† Ø¯Ø§Ø®Ù„ Ø§Ù„Ø§Ù…ØªØ­Ø§Ù†";
+	final static public String addExamQuestionError = "Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ù…Ø­Ø§ÙˆÙ„Ø© Ø§Ø¶Ø§Ù�Ø© Ø³Ø¤Ø§Ù„ Ù„Ù„Ø§Ù…ØªØ­Ø§Ù†";
+	final static public String saveExamError = "Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ù…Ø­Ø§ÙˆÙ„Ø© Ø­Ù�Ø¸ Ø§Ù„Ø§Ù…ØªØ­Ø§Ù† Ù�ÙŠ Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª";
+	final static public String deleteExamError = "Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ù…Ø­Ø§ÙˆÙ„Ø© Ù…Ø³Ø­ Ø§Ù„Ø§Ù…ØªØ­Ø§Ù† Ù…Ù† Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª";
+	final static public String updateExamError = "Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ù…Ø­Ø§ÙˆÙ„Ø© ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„Ø§Ù…ØªØ­Ø§Ù† Ù�ÙŠ Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª";
+	final static public String findQuestionByIdError = "Ø®Ø·Ø£ Ø§Ø«Ù†Ø§Ø¡ Ù…Ø­Ø§ÙˆÙ„Ø© Ø§ÙŠØ¬Ø§Ø¯ Ø§Ù„Ø³Ø¤Ø§Ù„ Ù…Ù† Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª";
+	final static public String selectQuestionError = "Ø£Ø®ØªØ± Ø³Ø¤Ø§Ù„";
+	final static public String deleteQuestionError = "Ø®Ø·Ø£ Ø£Ø«Ù†Ø§Ø¡ Ù…Ø­Ø§ÙˆÙ„Ø© Ù…Ø³Ø­ Ø§Ù„Ø³Ø¤Ø§Ù„ Ù…Ù† Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª";
 
-	final static public String saveUnitSuccess = "تم اضافة الوحده بنجاح";
-	final static public String saveQuestionSuccess = "تم اضافة السؤال بنجاح";
-	final static public String saveExamSuccess = "تم اضافة الامتحان بنجاح";
-	final static public String updateUnitSuccess = "تم تعديل الوحده بنجاح";
-	final static public String updateQuestionSuccess = "تم تعديل السؤال بنجاح";
-	final static public String updateExamSuccess = "تم تعديل الامتحان بنجاح";
-	final static public String deleteUnitSuccess = "تم مسح الوحده بنجاح";
-	final static public String deleteQuestionSuccess = "تم مسح السؤال بنجاح";
-	final static public String deleteExamSuccess = "تم مسح الامتحان بنجاح";
-	final static public String addExamQuestionSuccess = "تم اضافة الاسئلة للامتحان بنجاح";
-	final static public String deleteExamQuestionSuccess = "تم مسح سؤال من الامتحان بنجاح";
+	final static public String saveUnitSuccess = "ØªÙ… Ø§Ø¶Ø§Ù�Ø© Ø§Ù„ÙˆØ­Ø¯Ù‡ Ø¨Ù†Ø¬Ø§Ø­";
+	final static public String saveQuestionSuccess = "ØªÙ… Ø§Ø¶Ø§Ù�Ø© Ø§Ù„Ø³Ø¤Ø§Ù„ Ø¨Ù†Ø¬Ø§Ø­";
+	final static public String saveExamSuccess = "ØªÙ… Ø§Ø¶Ø§Ù�Ø© Ø§Ù„Ø§Ù…ØªØ­Ø§Ù† Ø¨Ù†Ø¬Ø§Ø­";
+	final static public String updateUnitSuccess = "ØªÙ… ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„ÙˆØ­Ø¯Ù‡ Ø¨Ù†Ø¬Ø§Ø­";
+	final static public String updateQuestionSuccess = "ØªÙ… ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„Ø³Ø¤Ø§Ù„ Ø¨Ù†Ø¬Ø§Ø­";
+	final static public String updateExamSuccess = "ØªÙ… ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„Ø§Ù…ØªØ­Ø§Ù† Ø¨Ù†Ø¬Ø§Ø­";
+	final static public String deleteUnitSuccess = "ØªÙ… Ù…Ø³Ø­ Ø§Ù„ÙˆØ­Ø¯Ù‡ Ø¨Ù†Ø¬Ø§Ø­";
+	final static public String deleteQuestionSuccess = "ØªÙ… Ù…Ø³Ø­ Ø§Ù„Ø³Ø¤Ø§Ù„ Ø¨Ù†Ø¬Ø§Ø­";
+	final static public String deleteExamSuccess = "ØªÙ… Ù…Ø³Ø­ Ø§Ù„Ø§Ù…ØªØ­Ø§Ù† Ø¨Ù†Ø¬Ø§Ø­";
+	final static public String addExamQuestionSuccess = "ØªÙ… Ø§Ø¶Ø§Ù�Ø© Ø§Ù„Ø§Ø³Ø¦Ù„Ø© Ù„Ù„Ø§Ù…ØªØ­Ø§Ù† Ø¨Ù†Ø¬Ø§Ø­";
+	final static public String deleteExamQuestionSuccess = "ØªÙ… Ù…Ø³Ø­ Ø³Ø¤Ø§Ù„ Ù…Ù† Ø§Ù„Ø§Ù…ØªØ­Ø§Ù† Ø¨Ù†Ø¬Ø§Ø­";
 
-	final static public String deleteQuestionConfirm = "مسح السؤال";
-	final static public String deleteUnitConfirm = "مسح الوحده (سيتم مسح كل الاسئله بداخل الوحده)";
-	final static public String existSystemConfirm = "خروج من البرنامج";
+	final static public String deleteQuestionConfirm = "Ù…Ø³Ø­ Ø§Ù„Ø³Ø¤Ø§Ù„";
+	final static public String deleteUnitConfirm = "Ù…Ø³Ø­ Ø§Ù„ÙˆØ­Ø¯Ù‡ (Ø³ÙŠØªÙ… Ù…Ø³Ø­ ÙƒÙ„ Ø§Ù„Ø§Ø³Ø¦Ù„Ù‡ Ø¨Ø¯Ø§Ø®Ù„ Ø§Ù„ÙˆØ­Ø¯Ù‡)";
+	final static public String existSystemConfirm = "Ø®Ø±ÙˆØ¬ Ù…Ù† Ø§Ù„Ø¨Ø±Ù†Ø§Ù…Ø¬";
 }

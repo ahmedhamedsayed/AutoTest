@@ -22,6 +22,9 @@ public class Unit {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
+	@Column(name = "password")
+	private String password;
+
 	@Column(name = "description")
 	private String description;
 
@@ -34,6 +37,14 @@ public class Unit {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getDescription() {
@@ -54,6 +65,7 @@ public class Unit {
 
 	@Override
 	public String toString() {
-		return "ID = " + String.valueOf(getId()) + "\nDescription = " + getDescription() + "\n";
+		return "ID = " + String.valueOf(getId()) + "\nDescription = "
+				+ getDescription() + "\n";
 	}
 }

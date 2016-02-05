@@ -9,6 +9,7 @@ import questionPackage.question.QuestionService;
 import unit.Unit;
 import unit.UnitService;
 import util.shape.ConfirmMessage;
+import util.shape.InputDialog;
 import util.shape.TimerCountDown;
 import configuration.uiConfiguration.Message;
 import exam.Exam;
@@ -57,7 +58,10 @@ public class AdminService {
 
 	public void adminNext() {
 		if (MainService.getInstance().getCurrentState().equals(MainState.AdminUnits)) {
-			refreshAdminQuestions();
+			String password = InputDialog.create("Enter Old Unit Password");
+			if (getSelectedUnit() != null && getSelectedUnit().getPassword().equals(password)) {
+				refreshAdminQuestions();
+			}
 		} else {
 			MainService.getInstance().nextState(MainState.AdminShowQuestion);
 			QuestionService.getInstance().openQuestion(getSelectedQuestion(), new TimerCountDown(0, 0, 0));

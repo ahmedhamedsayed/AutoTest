@@ -41,19 +41,24 @@ public class UnitService {
 
 	public void addUnit() {
 		String newName = InputDialog.create("Enter Unit Name");
-		if (newName != null) {
+		String newPassword = InputDialog.create("Enter Unit Password");
+		if (newName != null && newPassword != null && !newName.trim().isEmpty() && !newPassword.trim().isEmpty()) {
 			Unit unit = new Unit();
 			unit.setDescription(newName);
+			unit.setPassword(newPassword);
 			UnitRepository.getInstance().save(unit);
 			Success.reportSuccessMessage(Message.saveUnitSuccess);
 		}
 	}
 
 	public void updateUnit(Unit unit) {
-		if (unit != null) {
+		String password = InputDialog.create("Enter Old Unit Password");
+		if (unit != null && unit.getPassword().equals(password)) {
 			String newName = InputDialog.create("Enter Unit Name");
-			if (newName != null) {
+			String newPassword = InputDialog.create("Enter New Unit Password");
+			if (newName != null && newPassword != null && !newName.trim().isEmpty() && !newPassword.trim().isEmpty()) {
 				unit.setDescription(newName);
+				unit.setPassword(newPassword);
 				UnitRepository.getInstance().update(unit);
 				Success.reportSuccessMessage(Message.updateUnitSuccess);
 			}
@@ -61,7 +66,8 @@ public class UnitService {
 	}
 
 	public void deleteUnit(Unit unit) {
-		if (unit != null) {
+		String password = InputDialog.create("Enter Unit Password");
+		if (unit != null && unit.getPassword().equals(password)) {
 			UnitRepository.getInstance().delete(unit);
 			Success.reportSuccessMessage(Message.deleteUnitSuccess);
 		}
