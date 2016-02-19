@@ -13,8 +13,8 @@ import models.Exam;
 import models.Question;
 import models.Unit;
 import constants.ButtonCommand;
+import constants.Message;
 import constants.dimentions.AdminDimension;
-import constants.paths.BackGroundPicturePath;
 import services.AdminService;
 import services.ExamService;
 import util.Dimension;
@@ -85,7 +85,7 @@ public class AdminUI {
 		JScrollPane examScrollPane = ScrollPane.scrollPane(AdminDimension.getInstance().scrollPaneDimension[1], 20, adminExamList);
 		panel.add(examScrollPane);
 
-		panel.add(Picture.image(dim, BackGroundPicturePath.GeneralBackGroundPath));
+		panel.add(Picture.image(dim, Message.GENERAL_BACK_GROUND_PATH.getValue()));
 		buildDefaultAction();
 		buildExamAction();
 		return panel;

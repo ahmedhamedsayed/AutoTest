@@ -7,8 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import constants.ButtonCommand;
+import constants.Message;
 import constants.dimentions.LoginDimension;
-import constants.paths.BackGroundPicturePath;
 import services.LoginService;
 import util.Dimension;
 import util.Format;
@@ -48,7 +48,7 @@ public class LoginUI {
 			buttons[i] = new Button().button(curButtonDimension, curButtonName);
 			panel.add(buttons[i]);
 		}
-		panel.add(Picture.image(dim, BackGroundPicturePath.GeneralBackGroundPath));
+		panel.add(Picture.image(dim, Message.GENERAL_BACK_GROUND_PATH.getValue()));
 		buildAction(buttons);
 		return panel;
 	}

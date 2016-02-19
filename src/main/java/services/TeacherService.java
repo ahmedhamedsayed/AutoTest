@@ -21,7 +21,7 @@ import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
 import configuration.databaseConfiguration.DatabaseEngine;
-import constants.TeacherMessage;
+import constants.Message;
 
 public class TeacherService {
 
@@ -34,7 +34,7 @@ public class TeacherService {
 	}
 
 	public void generateFinalSheet() {
-		String path = Chooser.chooser(TeacherMessage.finalSheetPathChooserMessage);
+		String path = Chooser.chooser(Message.FINAL_SHEET_PATH_CHOOSER_MESSAGE.getValue());
 		HashMap<Integer, HashMap<String, Integer>> exams = new HashMap<Integer, HashMap<String,Integer>>();
 		File folder = new File(path);
 		File[] databases = folder.listFiles();
@@ -76,25 +76,38 @@ public class TeacherService {
 			PdfPTable table = new PdfPTable(3);
 			table.setWidthPercentage(50);
 			table.setWidths(columnWidths);
-			for (int i = 0; i < 3; ++i) {
-				String cellText = TeacherMessage.finalSheetHeader[i] + (i == 1 ? "[" + String.valueOf(exam.getMark()) + "]" : "");
-				PdfPCell cell = PDFCell.pdfCell(11, true, cellText, 20f);
-				table.addCell(cell);
-			}
+
+			buildPDFHeader(table, exam.getMark());
+
 			SortedSet<String> studentsName = new TreeSet<String>(examStudents.keySet());
 			for (String studentName : studentsName) {
 				PdfPCell examNameCell = PDFCell.pdfCell(9, false, exam.getName(), 15f);
 				PdfPCell markCell = PDFCell.pdfCell(9, false, String.valueOf(examStudents.get(studentName)), 15f);
-				PdfPCell studentIdCell = PDFCell.pdfCell(9, false, studentName, 15f);
+				PdfPCell idCell = PDFCell.pdfCell(9, false, studentName, 15f);
 				table.addCell(examNameCell);
 				table.addCell(markCell);
-				table.addCell(studentIdCell);
+				table.addCell(idCell);
 			}
+			
 			document.add(table);
 			document.close();
 			writer.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void buildPDFHeader(PdfPTable table, Integer examMark) {
+		String idCellText = Message.FINAL_SHEET_HEADER_ID_COLUMN.getValue();
+		PdfPCell headerIdCell = PDFCell.pdfCell(11, true, idCellText, 20f);
+		table.addCell(headerIdCell);
+
+		String markCellText = Message.FINAL_SHEET_HEADER_MARK.getValue() + "[" + String.valueOf(examMark) + "]";
+		PdfPCell headerMarkCell = PDFCell.pdfCell(11, true, markCellText, 20f);
+		table.addCell(headerMarkCell);
+
+		String examNameCellText = Message.FINAL_SHEET_HEADER_EXAM_NAME.getValue();
+		PdfPCell headerExamNameCell = PDFCell.pdfCell(11, true, examNameCellText, 20f);
+		table.addCell(headerExamNameCell);
 	}
 }

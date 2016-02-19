@@ -13,8 +13,8 @@ import javax.swing.JTextArea;
 
 import constants.ButtonCommand;
 import constants.MainState;
+import constants.Message;
 import constants.dimentions.ExamDimension;
-import constants.paths.BackGroundPicturePath;
 import constants.paths.ExamLabelPath;
 import models.Exam;
 import models.ExamPercentage;
@@ -111,7 +111,7 @@ public class ExamUI {
 		JScrollPane examScrollPane = ScrollPane.scrollPane(ExamDimension.scrollPaneDimension[1], 20, examList);
 		panel.add(examScrollPane);
 
-		panel.add(Picture.image(dim, BackGroundPicturePath.GeneralBackGroundPath));
+		panel.add(Picture.image(dim, Message.GENERAL_BACK_GROUND_PATH.getValue()));
 		buildDefaultAction();
 		buildQuestionAction();
 		buildExamAction();

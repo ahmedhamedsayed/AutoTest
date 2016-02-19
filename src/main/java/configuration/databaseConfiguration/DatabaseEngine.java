@@ -9,7 +9,6 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import constants.Message;
-import constants.paths.DatabasesPath;
 import util.shape.Error;
 
 public class DatabaseEngine {
@@ -45,11 +44,11 @@ public class DatabaseEngine {
 	}
 	
 	public Session getMainDatabaseSession() {
-		return getSession(DatabasesPath.mainDatabasePath);
+		return getSession(Message.MAIN_DATABASE_PATH.getValue());
 	}
 	
 	public Session getStudentDatabaseSession() {
-		return getSession(DatabasesPath.studentDatabasePath);
+		return getSession(Message.STUDENT_DATABASE_PATH.getValue());
 	}
 	
 	public Session getSession(String databasePath) {

@@ -12,7 +12,7 @@ import ui.LoginUI;
 import ui.SelectQuestionUI;
 import configuration.databaseConfiguration.DatabaseEngine;
 import constants.MainState;
-import constants.paths.DatabasesPath;
+import constants.Message;
 
 public class MainService extends JFrame {
 
@@ -42,8 +42,8 @@ public class MainService extends JFrame {
 			this.add(panel);
 		mainStates = new ArrayList<MainState>();
 		nextState(MainState.Login);
-		DatabaseEngine.getInstance().configureDatabase("persistence.xml", DatabasesPath.mainDatabasePath);
-		DatabaseEngine.getInstance().configureDatabase("studentPersistence.xml", DatabasesPath.studentDatabasePath);
+		DatabaseEngine.getInstance().configureDatabase("persistence.xml", Message.MAIN_DATABASE_PATH.getValue());
+		DatabaseEngine.getInstance().configureDatabase("studentPersistence.xml", Message.STUDENT_DATABASE_PATH.getValue());
 	}
 	
 	public MainState getCurrentState() {

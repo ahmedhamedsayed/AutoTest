@@ -7,8 +7,8 @@ import javax.swing.JTextArea;
 
 import models.Question;
 import constants.ButtonCommand;
+import constants.Message;
 import constants.dimentions.TrueOrFalseDimension;
-import constants.paths.BackGroundPicturePath;
 import constants.paths.TrueOrFalseLabelPath;
 import services.QuestionService;
 import util.Dimension;
@@ -69,7 +69,7 @@ public class TrueOrFalseUI {
             panel.add(button[i]);
         }
 
-        panel.add(Picture.image(dim, BackGroundPicturePath.QuestionBackGroundPath));
+        panel.add(Picture.image(dim, Message.QUESTION_BACK_GROUND_PATH.getValue()));
 
         return panel;
     }

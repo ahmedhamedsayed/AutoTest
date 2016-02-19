@@ -15,8 +15,8 @@ import models.Choice;
 import models.Choose;
 import models.Question;
 import constants.ButtonCommand;
+import constants.Message;
 import constants.dimentions.ChooseDimension;
-import constants.paths.BackGroundPicturePath;
 import constants.paths.ChooseLabelPath;
 import services.ChooseService;
 import services.ExamExecuteService;
@@ -73,9 +73,10 @@ public class ChooseUI implements QuestionUI {
 		}
 		timerCountDown = new TimerCountDown(0, 0, 0);
 		panel.add(timerCountDown.getLabel());
-		panel.add(Picture.image(dim, BackGroundPicturePath.QuestionBackGroundPath));
+		panel.add(Picture.image(dim, Message.QUESTION_BACK_GROUND_PATH.getValue()));
 	}
 
+	@SuppressWarnings("unused")
 	private void buildAction() {
 		KeyListener saveAction = new KeyListener() {
 
