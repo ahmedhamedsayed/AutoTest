@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import configuration.uiConfiguration.Dimension;
+import util.Dimension;
 
 public class Picture {
     public static JLabel image(Dimension dim, String picPath) {

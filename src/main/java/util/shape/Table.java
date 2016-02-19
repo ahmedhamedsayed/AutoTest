@@ -2,8 +2,8 @@ package util.shape;
 
 import javax.swing.JTable;
 
-import configuration.uiConfiguration.Dimension;
-import configuration.uiConfiguration.Format;
+import util.Dimension;
+import util.Format;
 
 public class Table {
 

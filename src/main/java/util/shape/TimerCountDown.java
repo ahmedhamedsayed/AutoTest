@@ -6,10 +6,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
-import main.MainService;
+import services.MainService;
 import util.Converter;
-import configuration.uiConfiguration.Dimension;
-import configuration.uiConfiguration.Format;
+import util.Dimension;
+import util.Format;
 
 public class TimerCountDown {
     private JLabel label;

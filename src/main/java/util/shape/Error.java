@@ -11,5 +11,6 @@ public class Error {
 	public static void reportErrorMessageWithException(Exception e, String message) {
 		e.printStackTrace();
 		reportErrorMessage(message);
+		System.exit(0);
 	}
 }

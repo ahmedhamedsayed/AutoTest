@@ -5,8 +5,8 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
 
-import configuration.uiConfiguration.Dimension;
-import configuration.uiConfiguration.Format;
+import util.Dimension;
+import util.Format;
 
 public class TextArea {
 

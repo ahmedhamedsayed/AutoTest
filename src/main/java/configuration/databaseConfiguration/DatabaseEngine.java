@@ -8,8 +8,9 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import constants.Message;
+import constants.paths.DatabasesPath;
 import util.shape.Error;
-import configuration.uiConfiguration.Message;
 
 public class DatabaseEngine {
 

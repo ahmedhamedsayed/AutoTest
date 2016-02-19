@@ -1,6 +1,7 @@
 package main;
 
-import configuration.uiConfiguration.Format;
+import services.MainService;
+import util.Format;
 
 public class Main {
 

@@ -2,7 +2,7 @@ package util.shape;
 
 import javax.swing.JPanel;
 
-import configuration.uiConfiguration.Dimension;
+import util.Dimension;
 
 public class Panel {
 

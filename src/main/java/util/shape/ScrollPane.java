@@ -3,8 +3,8 @@ package util.shape;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 
-import configuration.uiConfiguration.Dimension;
-import configuration.uiConfiguration.Format;
+import util.Dimension;
+import util.Format;
 
 public class ScrollPane {
     

@@ -5,7 +5,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import configuration.uiConfiguration.Dimension;
+import util.Dimension;
 
 public class Label {
     public static JLabel label(Dimension dim, String picPath) {

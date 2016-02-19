@@ -2,9 +2,6 @@ package util;
 
 import java.util.List;
 
-/**
- * Created by Ahmed Hamed on 8/22/2015.
- */
 public class Converter {
 
     private static Converter converter;

@@ -8,8 +8,8 @@ import java.lang.reflect.InvocationTargetException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import main.MainService;
-import configuration.uiConfiguration.Dimension;
+import services.MainService;
+import util.Dimension;
 
 public class Button implements ActionListener {
 	public JButton button(Dimension dim, String picPath) {
