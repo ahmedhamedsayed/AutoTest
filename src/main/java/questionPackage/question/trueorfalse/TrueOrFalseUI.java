@@ -47,7 +47,7 @@ public class TrueOrFalseUI {
         for (int i = 0; i < 3; ++i) {
             Dimension curLabelDimension = TrueOrFalseDimension.labelDimension[i];
             String curLabelName = TrueOrFalseLabelPath.labelName[i];
-            label[i] = Label.label(curLabelDimension, 15, curLabelName);
+            label[i] = Label.label(curLabelDimension, curLabelName);
             panel.add(label[i]);
         }
 

@@ -40,7 +40,7 @@ public class StudentRepository {
 			session.close();
 			return student;
 		} catch (Exception e) {
-			Error.reportErrorMessage(Message.saveExamError);
+			Error.reportErrorMessage(""/*Message.saveExamError*/);
 			System.exit(0);
 			return null;
 		}

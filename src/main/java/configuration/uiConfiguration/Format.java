@@ -7,7 +7,7 @@ import java.util.Locale;
 
 public class Format {
     public static Font getFont(int fontSize) {
-        return new Font("Arabic Typesetting", Font.BOLD, fontSize);
+        return new Font("Arial", Font.PLAIN, fontSize);
     }
 
     public static ComponentOrientation getArabicLanguage() {

@@ -8,7 +8,6 @@ import questionPackage.question.Question;
 import util.shape.Error;
 import util.shape.InputDialog;
 import util.shape.Success;
-import configuration.uiConfiguration.Message;
 
 public class UnitService {
 
@@ -24,7 +23,7 @@ public class UnitService {
 		try {
 			return UnitRepository.getInstance().findAll();
 		} catch (Exception e) {
-			Error.reportErrorMessage(Message.loadAllUnitsError);
+			Error.reportErrorMessage("");
 			System.exit(0);
 			return null;
 		}
@@ -47,7 +46,7 @@ public class UnitService {
 			unit.setDescription(newName);
 			unit.setPassword(newPassword);
 			UnitRepository.getInstance().save(unit);
-			Success.reportSuccessMessage(Message.saveUnitSuccess);
+			Success.reportSuccessMessage("");
 		}
 	}
 
@@ -60,7 +59,7 @@ public class UnitService {
 				unit.setDescription(newName);
 				unit.setPassword(newPassword);
 				UnitRepository.getInstance().update(unit);
-				Success.reportSuccessMessage(Message.updateUnitSuccess);
+				Success.reportSuccessMessage("");
 			}
 		}
 	}
@@ -69,7 +68,7 @@ public class UnitService {
 		String password = InputDialog.create("Enter Unit Password");
 		if (unit != null && unit.getPassword().equals(password)) {
 			UnitRepository.getInstance().delete(unit);
-			Success.reportSuccessMessage(Message.deleteUnitSuccess);
+			Success.reportSuccessMessage("");
 		}
 	}
 }

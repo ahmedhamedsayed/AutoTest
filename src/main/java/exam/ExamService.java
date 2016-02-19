@@ -12,7 +12,6 @@ import util.shape.InputDialog;
 import util.shape.Success;
 import util.shape.TimerCountDown;
 import admin.AdminService;
-import configuration.uiConfiguration.Message;
 import exam.examPercentage.ExamPercentage;
 import exam.examPercentage.ExamPercentageRepository;
 
@@ -43,7 +42,7 @@ public class ExamService {
 	public void deleteExamsQuestion(Question question) {
 		if (question != null) {
 			ExamRepository.getInstance().deleteExamsQuestion(question);
-			Success.reportSuccessMessage(Message.deleteExamQuestionSuccess);
+			Success.reportSuccessMessage("");
 		}
 	}
 
@@ -56,13 +55,13 @@ public class ExamService {
 					List<Question> questions = UnitService.getInstance().getUnitQuesiton(unit);
 					for (Question question : questions)
 						ExamRepository.getInstance().addExamQuestion(exam, question);
-					Success.reportSuccessMessage(Message.addExamQuestionSuccess);
+					Success.reportSuccessMessage("");
 				}
 			} else {
 				Question question = AdminService.getInstance().getSelectedQuestion();
 				if (question != null) {
 					ExamRepository.getInstance().addExamQuestion(exam, question);
-					Success.reportSuccessMessage(Message.addExamQuestionSuccess);
+					Success.reportSuccessMessage("");
 				}
 			}
 		}
@@ -88,7 +87,7 @@ public class ExamService {
 		if (exam != null) {
 			ExamRepository.getInstance().delete(exam);
 			AdminService.getInstance().refreshAdminExams();
-			Success.reportSuccessMessage(Message.deleteExamSuccess);
+			Success.reportSuccessMessage("");
 		}
 	}
 
@@ -103,17 +102,17 @@ public class ExamService {
 		if (question != null) {
 			ExamRepository.getInstance().deleteExamQuestion(exam, question);
 			refreshExamQuestion();
-			Success.reportSuccessMessage(Message.deleteExamQuestionSuccess);
+			Success.reportSuccessMessage("");
 		}
 	}
 
 	public void examDone() {
 		if (MainService.getInstance().getCurrentState().equals(MainState.AdminNewExam)) {
 			ExamRepository.getInstance().save(ExamUI.getInstance().getExam());
-			Success.reportSuccessMessage(Message.saveExamSuccess);
+			Success.reportSuccessMessage("");
 		} else if (MainService.getInstance().getCurrentState().equals(MainState.AdminUpdateExam)) {
 			ExamRepository.getInstance().update(ExamUI.getInstance().getExam());
-			Success.reportSuccessMessage(Message.updateExamSuccess);
+			Success.reportSuccessMessage("");
 		}
 	}
 

@@ -15,7 +15,7 @@ public class PDFCell {
 
 	public static PdfPCell pdfCell(int fontSize, boolean isBold, String phrase, float height) {
 		try {
-			BaseFont baseFont = BaseFont.createFont("c://windows/fonts/arialuni.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+			BaseFont baseFont = BaseFont.createFont("fonts/arialuni.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 			Font font = new Font(baseFont, fontSize);
 			if (isBold)
 				font.setStyle(Font.BOLD);

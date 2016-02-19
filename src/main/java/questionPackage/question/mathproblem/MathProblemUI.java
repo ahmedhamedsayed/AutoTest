@@ -47,7 +47,7 @@ public class MathProblemUI {
         for (int i = 0; i < 6; ++i) {
             Dimension curLabelDimension = MathProblemDimension.labelDimension[i];
             String curLabelName = MathProblemLabelPath.labelName[i];
-            label[i] = Label.label(curLabelDimension, 15, curLabelName);
+            label[i] = Label.label(curLabelDimension, curLabelName);
             panel.add(label[i]);
         }
 

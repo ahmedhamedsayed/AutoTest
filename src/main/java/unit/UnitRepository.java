@@ -35,7 +35,7 @@ public class UnitRepository {
 			session.close();
 			return (list.size() == 0) ? null : list.get(0);
 		} catch (Exception e) {
-			Error.reportErrorMessage(Message.findUnitIdError);
+			Error.reportErrorMessage("");
 			System.exit(0);
 			return null;
 		}
@@ -50,7 +50,7 @@ public class UnitRepository {
 			session.close();
 			return (list.size() == 0) ? null : list.get(0);
 		} catch (Exception e) {
-			Error.reportErrorMessage(Message.findUnitByDescriptionError);
+			Error.reportErrorMessage("");
 			System.exit(0);
 			return null;
 		}
@@ -59,7 +59,7 @@ public class UnitRepository {
 	public Unit save(Unit unit) {
 		Unit unitExist = findOneByDescription(unit.getDescription());
 		if (unitExist != null) {
-			Error.reportErrorMessage(Message.unitExistError);
+			Error.reportErrorMessage("");
 			return unitExist;
 		}
 		try {
@@ -70,7 +70,7 @@ public class UnitRepository {
 			session.close();
 			return unit;
 		} catch (Exception e) {
-			Error.reportErrorMessage(Message.saveUnitError);
+			Error.reportErrorMessage("");
 			System.exit(0);
 			return null;
 		}
@@ -79,7 +79,7 @@ public class UnitRepository {
 	public void update(Unit unit) {
 		Unit unitExist = findOneByDescription(unit.getDescription());
 		if (unitExist != null && unitExist.getId() != unit.getId()) {
-			Error.reportErrorMessage(Message.unitExistError);
+			Error.reportErrorMessage("");
 		} else {
 			try {
 				Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
@@ -88,7 +88,7 @@ public class UnitRepository {
 				session.getTransaction().commit();
 				session.close();
 			} catch (Exception e) {
-				Error.reportErrorMessage(Message.updateUnitError);
+				Error.reportErrorMessage("");
 				System.exit(0);
 			}
 		}
@@ -104,7 +104,7 @@ public class UnitRepository {
 			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
-			Error.reportErrorMessage(Message.deleteUnitError);
+			Error.reportErrorMessage("");
 			System.exit(0);
 		}
 	}

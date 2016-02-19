@@ -42,7 +42,7 @@ public class ChooseRepository implements QuestionRepository {
 			session.close();
 			return (list.size() == 0) ? null : list.get(0);
 		} catch (Exception e) {
-			Error.reportErrorMessage(Message.findQuestionByIdError);
+			Error.reportErrorMessage("");
 			System.exit(0);
 			return null;
 		}
@@ -91,7 +91,7 @@ public class ChooseRepository implements QuestionRepository {
 			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
-			Error.reportErrorMessage(Message.deleteQuestionError);
+			Error.reportErrorMessage("");
 			System.exit(0);
 		}
 	}

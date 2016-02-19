@@ -12,7 +12,6 @@ import javax.swing.JScrollPane;
 import questionPackage.question.Question;
 import unit.Unit;
 import util.shape.Button;
-import util.shape.Error;
 import util.shape.Panel;
 import util.shape.Picture;
 import util.shape.ScrollPane;
@@ -20,7 +19,6 @@ import configuration.commandConfiguration.ButtonCommand;
 import configuration.uiConfiguration.BackGroundPicturePath;
 import configuration.uiConfiguration.Dimension;
 import configuration.uiConfiguration.Format;
-import configuration.uiConfiguration.Message;
 import exam.Exam;
 import exam.ExamService;
 
@@ -28,8 +26,7 @@ public class AdminUI {
 
 	private static AdminUI adminUI;
 	private JPanel panel;
-	@SuppressWarnings("rawtypes")
-	private JList adminUnitList, adminQuestionList, adminExamList;
+	private JList<String> adminUnitList, adminQuestionList, adminExamList;
 	private JScrollPane adminUnitScrollPane, adminQuestionScrollPane;
 	private List<Unit> units;
 	private List<Question> questions;
@@ -57,7 +54,6 @@ public class AdminUI {
 		adminExamList.requestFocusInWindow();
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public JPanel getPanel() {
 		if (panel != null)
 			return panel;
@@ -74,17 +70,17 @@ public class AdminUI {
 			panel.add(buttons[i]);
 		}
 
-		adminUnitList = new JList(new String[0]);
-		adminUnitScrollPane = ScrollPane.scrollPane(AdminDimension.getInstance().scrollPaneDimension[0], 30, adminUnitList);
+		adminUnitList = new JList<String>(new String[0]);
+		adminUnitScrollPane = ScrollPane.scrollPane(AdminDimension.getInstance().scrollPaneDimension[0], 20, adminUnitList);
 		panel.add(adminUnitScrollPane);
 
-		adminQuestionList = new JList(new String[0]);
-		adminQuestionScrollPane = ScrollPane.scrollPane(AdminDimension.getInstance().scrollPaneDimension[0], 30, adminQuestionList);
+		adminQuestionList = new JList<String>(new String[0]);
+		adminQuestionScrollPane = ScrollPane.scrollPane(AdminDimension.getInstance().scrollPaneDimension[0], 20, adminQuestionList);
 		panel.add(adminQuestionScrollPane);
 		adminQuestionScrollPane.setVisible(false);
 
-		adminExamList = new JList(new String[0]);
-		JScrollPane examScrollPane = ScrollPane.scrollPane(AdminDimension.getInstance().scrollPaneDimension[1], 30, adminExamList);
+		adminExamList = new JList<String>(new String[0]);
+		JScrollPane examScrollPane = ScrollPane.scrollPane(AdminDimension.getInstance().scrollPaneDimension[1], 20, adminExamList);
 		panel.add(examScrollPane);
 
 		panel.add(Picture.image(dim, BackGroundPicturePath.GeneralBackGroundPath));
@@ -157,7 +153,6 @@ public class AdminUI {
 		adminExamList.addKeyListener(examAction);
 	}
 
-	@SuppressWarnings("unchecked")
 	public void setUnits(List<Unit> units) {
 		this.units = units;
 		adminUnitScrollPane.setVisible(true);
@@ -173,13 +168,12 @@ public class AdminUI {
 
 	public Unit getSelectedUnit() {
 		if (adminUnitList.getSelectedIndex() == -1) {
-			Error.reportErrorMessage(Message.selectUnitError);
+			//Error.reportErrorMessage(Message.selectUnitError);
 			return null;
 		}
 		return units.get(adminUnitList.getSelectedIndex());
 	}
 
-	@SuppressWarnings("unchecked")
 	public void setQuestions(List<Question> questions) {
 		if (questions == null) {
 			return;
@@ -198,13 +192,12 @@ public class AdminUI {
 
 	public Question getSelectedQuestion() {
 		if (adminQuestionList.getSelectedIndex() == -1) {
-			Error.reportErrorMessage(Message.selectQuestionError);
+			//Error.reportErrorMessage(Message.selectQuestionError);
 			return null;
 		}
 		return questions.get(adminQuestionList.getSelectedIndex());
 	}
 
-	@SuppressWarnings("unchecked")
 	public void setExams(List<Exam> exams) {
 		this.exams = exams;
 		String[] examDescription = new String[exams.size()];
@@ -218,7 +211,7 @@ public class AdminUI {
 
 	public Exam getSelectedExam() {
 		if (adminExamList.getSelectedIndex() == -1) {
-			Error.reportErrorMessage(Message.selectExamError);
+			//Error.reportErrorMessage(Message.selectExamError);
 			return null;
 		}
 		return exams.get(adminExamList.getSelectedIndex());

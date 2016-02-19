@@ -50,14 +50,14 @@ public class ChooseUI implements QuestionUI {
 		for (int i = 0; i < 3; ++i) {
 			Dimension curLabelDimension = ChooseDimension.labelDimension[i];
 			String curLabelName = ChooseLabelPath.labelName[i];
-			label[i] = Label.label(curLabelDimension, 20, curLabelName);
+			label[i] = Label.label(curLabelDimension, curLabelName);
 			panel.add(label[i]);
 		}
 
 		chooseTextArea = new JTextArea[textAreaCounter];
 		for (int i = 0; i < textAreaCounter; ++i) {
 			Dimension curTextAreaDimension = ChooseDimension.textAreaDimension[i];
-			chooseTextArea[i] = TextArea.textArea(curTextAreaDimension, 20);
+			chooseTextArea[i] = TextArea.textArea(curTextAreaDimension, 15);
 			panel.add(chooseTextArea[i]);
 		}
 

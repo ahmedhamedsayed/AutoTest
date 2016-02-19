@@ -11,7 +11,6 @@ import unit.UnitService;
 import util.shape.ConfirmMessage;
 import util.shape.InputDialog;
 import util.shape.TimerCountDown;
-import configuration.uiConfiguration.Message;
 import exam.Exam;
 import exam.ExamService;
 
@@ -26,7 +25,6 @@ public class AdminService {
 	}
 
 	public void refreshAdminUnits() {
-		MainService.getInstance().nextState(MainState.AdminUnits);
 		AdminUI.getInstance().setUnits(UnitService.getInstance().getAllUnits());
 	}
 
@@ -52,6 +50,7 @@ public class AdminService {
 	}
 
 	public void openAdmin() {
+		MainService.getInstance().nextState(MainState.AdminUnits);
 		refreshAdminUnits();
 		refreshAdminExams();
 	}
@@ -89,7 +88,7 @@ public class AdminService {
 
 	public void adminDelete() {
 		if (MainService.getInstance().getCurrentState().equals(MainState.AdminUnits)) {
-			if (ConfirmMessage.confirmMessage(Message.deleteUnitConfirm)) {
+			if (ConfirmMessage.confirmMessage(""/*Message.deleteUnitConfirm*/)) {
 				List<Question> questions = UnitService.getInstance().getUnitQuesiton(getSelectedUnit());
 				for (Question question : questions) {
 					ExamService.getInstance().deleteExamsQuestion(question);
@@ -98,7 +97,7 @@ public class AdminService {
 				refreshAdminUnits();
 			}
 		} else {
-			if (ConfirmMessage.confirmMessage(Message.deleteQuestionConfirm)) {
+			if (ConfirmMessage.confirmMessage(""/*Message.deleteQuestionConfirm*/)) {
 				ExamService.getInstance().deleteExamsQuestion(getSelectedQuestion());
 				QuestionService.getInstance().deleteQuestion(getSelectedQuestion());
 				refreshAdminQuestions();
@@ -113,8 +112,8 @@ public class AdminService {
 	}
 
 	public void adminOut() {
-		if (ConfirmMessage.confirmMessage(Message.existSystemConfirm)) {
-			System.exit(0);
-		}
+//		if (ConfirmMessage.confirmMessage(Message.existSystemConfirm)) {
+//			System.exit(0);
+//		}
 	}
 }

@@ -7,8 +7,8 @@ import configuration.uiConfiguration.Dimension;
 import configuration.uiConfiguration.Format;
 
 public class ScrollPane {
-    @SuppressWarnings("rawtypes")
-	public static JScrollPane scrollPane(Dimension dim, int fontSize, JList list) {
+    
+	public static JScrollPane scrollPane(Dimension dim, int fontSize, JList<String> list) {
         list.setFont(Format.getFont(fontSize));
         JScrollPane scrollPane = new JScrollPane(list);
         scrollPane.setBounds(dim.getX(), dim.getY(), dim.getW(), dim.getH());

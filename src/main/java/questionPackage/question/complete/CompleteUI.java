@@ -47,7 +47,7 @@ public class CompleteUI {
         for (int i = 0; i < 3; ++i) {
             Dimension curLabelDimension = CompleteDimension.labelDimension[i];
             String curLabelName = CompleteLabelPath.labelName[i];
-            label[i] = Label.label(curLabelDimension, 15, curLabelName);
+            label[i] = Label.label(curLabelDimension, curLabelName);
             panel.add(label[i]);
         }
 

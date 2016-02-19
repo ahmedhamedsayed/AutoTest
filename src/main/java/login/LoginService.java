@@ -1,10 +1,11 @@
 package login;
 
+import configuration.uiConfiguration.Message;
 import teacher.TeacherService;
 import util.shape.ConfirmMessage;
+import util.shape.Error;
 import util.shape.InputDialog;
 import admin.AdminService;
-import configuration.uiConfiguration.Message;
 import exam.examexecute.ExamExecuteService;
 
 public class LoginService {
@@ -18,15 +19,33 @@ public class LoginService {
 	}
 
 	public void loginAdmin() {
-		String password = InputDialog.create("Enter Admin Password");
-		if (password != null && password.equals("admin"))
-			AdminService.getInstance().openAdmin();
+		while (true) {
+			String password = InputDialog.create(Message.ASK_ADMIN_PASSWORD.getValue());
+			if (password == null) {
+				break;
+			}
+			if (Message.ADMIN_PASSWORD.getValue().equals(password)) {
+				AdminService.getInstance().openAdmin();
+				break;
+			} else {
+				Error.reportErrorMessage(Message.PASSWORDWRONG.getValue());
+			}
+		}
 	}
 
 	public void loginTeacher() {
-		String password = InputDialog.create("Enter Teacher Password");
-		if (password != null && password.equals("teacher"))
-			TeacherService.getInstance().generateFinalSheet();
+		while (true) {
+			String password = InputDialog.create(Message.ASK_TEACHER_PASSWORD.getValue());
+			if (password == null) {
+				break;
+			}
+			if (Message.TEACHER_PASSWORD.getValue().equals(password)) {
+				TeacherService.getInstance().generateFinalSheet();
+				break;
+			} else {
+				Error.reportErrorMessage(Message.PASSWORDWRONG.getValue());
+			}
+		}
 	}
 
 	public void loginUser() {
@@ -36,7 +55,7 @@ public class LoginService {
 	}
 
 	public void loginOut() {
-		if (ConfirmMessage.confirmMessage(Message.existSystemConfirm)) {
+		if (ConfirmMessage.confirmMessage(""/*Message.existSystemConfirm*/)) {
 			System.exit(0);
 		}
 	}

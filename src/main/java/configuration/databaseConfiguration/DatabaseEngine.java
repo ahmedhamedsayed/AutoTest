@@ -27,8 +27,9 @@ public class DatabaseEngine {
 	}
 
 	public void configureDatabase(String configFile, String databasePath) {
-		if (databasesSessionFactory.containsKey(databasePath))
+		if (databasesSessionFactory.containsKey(databasePath)) {
 			return;
+		}
 		try {
 			Configuration configuration = new Configuration();
 			configuration.configure("META-INF/" + configFile);
@@ -37,8 +38,7 @@ public class DatabaseEngine {
 			SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 			databasesSessionFactory.put(databasePath, sessionFactory);
 		} catch (Exception e) {
-			e.printStackTrace();
-			Error.reportErrorMessage(Message.openDatabaseConnectionError);
+			Error.reportErrorMessageWithException(e, Message.OPEN_DATABASE_CONNECTION_ERROR.getValue());
 			System.exit(0);
 		}
 	}
@@ -55,9 +55,9 @@ public class DatabaseEngine {
 		try {
 			return databasesSessionFactory.get(databasePath).openSession();
 		} catch (Exception e) {
-			Error.reportErrorMessage(Message.openDatabaseConnectionError);
+			Error.reportErrorMessageWithException(e, Message.OPEN_DATABASE_SESSION_ERROR.getValue());
 			System.exit(0);
-			return null;
 		}
+		return null;
 	}
 }

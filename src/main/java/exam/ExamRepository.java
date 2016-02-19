@@ -7,7 +7,6 @@ import org.hibernate.Session;
 import questionPackage.question.Question;
 import util.shape.Error;
 import configuration.databaseConfiguration.DatabaseEngine;
-import configuration.uiConfiguration.Message;
 import exam.examPercentage.ExamPercentageRepository;
 
 public class ExamRepository {
@@ -28,7 +27,7 @@ public class ExamRepository {
 			session.close();
 			return exams;
 		} catch (Exception e) {
-			Error.reportErrorMessage(Message.loadAllExamsError);
+			Error.reportErrorMessage(""/*Message.loadAllExamsError*/);
 			System.exit(0);
 			return null;
 		}
@@ -70,7 +69,7 @@ public class ExamRepository {
 			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
-			Error.reportErrorMessage(Message.addExamQuestionError);
+			Error.reportErrorMessage("");
 			System.exit(0);
 		}
 	}
@@ -89,7 +88,7 @@ public class ExamRepository {
 			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
-			Error.reportErrorMessage(Message.deleteExamQuestionError);
+			Error.reportErrorMessage("");
 			System.exit(0);
 		}
 	}
@@ -119,7 +118,7 @@ public class ExamRepository {
 			return exam;
 
 		} catch (Exception e) {
-			Error.reportErrorMessage(Message.saveExamError);
+			Error.reportErrorMessage("");
 			System.exit(0);
 			return null;
 		}
@@ -133,7 +132,7 @@ public class ExamRepository {
 			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
-			Error.reportErrorMessage(Message.updateExamError);
+			Error.reportErrorMessage("");
 			System.exit(0);
 		}
 	}
@@ -149,7 +148,7 @@ public class ExamRepository {
 			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
-			Error.reportErrorMessage(Message.deleteExamError);
+			Error.reportErrorMessage("");
 			System.exit(0);
 		}
 	}

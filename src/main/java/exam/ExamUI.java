@@ -80,7 +80,7 @@ public class ExamUI {
 		for (int i = 0; i < 5; ++i) {
 			Dimension curLabelDimension = ExamDimension.labelDimension[i];
 			String curLabelName = ExamLabelPath.labelName[i];
-			label[i] = Label.label(curLabelDimension, 15, curLabelName);
+			label[i] = Label.label(curLabelDimension, curLabelName);
 			panel.add(label[i]);
 		}
 

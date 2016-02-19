@@ -45,6 +45,6 @@ public class QuestionService {
 
 	public void deleteQuestion(Question question) {
 		question.getQuestionRepository().delete(question);
-		Success.reportSuccessMessage(Message.deleteQuestionSuccess);
+		Success.reportSuccessMessage("");
 	}
 }

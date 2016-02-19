@@ -49,7 +49,7 @@ public class ModelProblemUI {
         for (int i = 0; i < 3; ++i) {
             Dimension curLabelDimension = ModelProblemDimension.labelDimension[i];
             String curLabelName = ModelProblemLabelPath.labelName[i];
-            JLabel label = Label.label(curLabelDimension, 15, curLabelName);
+            JLabel label = Label.label(curLabelDimension, curLabelName);
             panel.add(label);
         }
 

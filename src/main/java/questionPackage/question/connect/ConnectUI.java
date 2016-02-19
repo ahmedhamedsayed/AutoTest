@@ -47,7 +47,7 @@ public class ConnectUI {
         for (int i = 0; i < 10; ++i) {
             Dimension curLabelDimension = ConnectDimension.labelDimension[i];
             String curLabelName = ConnectLabelPath.labelName[i];
-            label[i] = Label.label(curLabelDimension, 15, curLabelName);
+            label[i] = Label.label(curLabelDimension, curLabelName);
             panel.add(label[i]);
         }
 
