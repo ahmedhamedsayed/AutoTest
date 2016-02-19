@@ -3,6 +3,7 @@ package configuration.uiConfiguration;
 public enum Message {
 	OPEN_DATABASE_CONNECTION_ERROR("خطأ أثناء محاولة الاتصال بقاعدة البيانات"),
 	OPEN_DATABASE_SESSION_ERROR("خطأ أثناء محاولة فتح قاعدة البيانات"),
+	
 	PASSWORDWRONG("كلمة السر خطأ"),
 	ASK_ADMIN_PASSWORD("أدخل كلمة السر للأدمن"),
 	ADMIN_PASSWORD("admin"),
