@@ -9,21 +9,21 @@
         <property name="hibernate.connection.password"></property>
         <property name="hibernate.dialect">configuration.databaseConfiguration.SQLiteDialect</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
-        <mapping class="unit.Unit"/>
-        <mapping class="exam.Exam"/>
-        <mapping class="exam.examPercentage.ExamPercentage"/>
-        <mapping class="questionPackage.question.Question"/>
-        <mapping class="questionPackage.question.choose.Choose"/>
-        <mapping class="questionPackage.question.choose.choice.Choice"/>
-        <mapping class="questionPackage.question.complete.Complete"/>
-        <mapping class="questionPackage.question.connect.Connect"/>
-        <mapping class="questionPackage.question.connect.connectpair.ConnectPair"/>
-        <mapping class="questionPackage.question.mathproblem.MathProblem"/>
-        <mapping class="questionPackage.question.mathproblem.law.Law"/>
-        <mapping class="questionPackage.question.mathproblem.lawanswer.LawAnswer"/>
-        <mapping class="questionPackage.question.modelproblem.ModelProblem"/>
-        <mapping class="questionPackage.question.modelproblem.modelproblemdescription.ModelProblemDescription"/>
-        <mapping class="questionPackage.question.modelproblem.modelproblemanswer.ModelProblemAnswer"/>
-        <mapping class="questionPackage.question.trueorfalse.TrueOrFalse"/>
+        <mapping class="models.Unit"/>
+        <mapping class="models.Exam"/>
+        <mapping class="models.ExamPercentage"/>
+        <mapping class="models.Question"/>
+        <mapping class="models.Choose"/>
+        <mapping class="models.Choice"/>
+        <mapping class="models.Complete"/>
+        <mapping class="models.Connect"/>
+        <mapping class="models.ConnectPair"/>
+        <mapping class="models.MathProblem"/>
+        <mapping class="models.Law"/>
+        <mapping class="models.LawAnswer"/>
+        <mapping class="models.ModelProblem"/>
+        <mapping class="models.ModelProblemDescription"/>
+        <mapping class="models.ModelProblemAnswer"/>
+        <mapping class="models.TrueOrFalse"/>
     </session-factory>
 </hibernate-configuration>

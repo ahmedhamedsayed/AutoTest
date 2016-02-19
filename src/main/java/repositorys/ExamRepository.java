@@ -3,12 +3,12 @@ package repositorys;
 import java.util.List;
 
 import models.Exam;
-import models.Question;
 
 import org.hibernate.Session;
 
 import util.shape.Error;
 import configuration.databaseConfiguration.DatabaseEngine;
+import constants.Message;
 
 public class ExamRepository {
 
@@ -28,120 +28,75 @@ public class ExamRepository {
 			session.close();
 			return exams;
 		} catch (Exception e) {
-			Error.reportErrorMessage(""/*Message.loadAllExamsError*/);
-			System.exit(0);
-			return null;
+			Error.reportErrorMessageWithException(e, Message.FIND_ALL_EXAMS_ERROR.getValue());
 		}
-
+		return null;
 	}
 
 	public Exam findOneById(int id) {
 		try {
 			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
-			@SuppressWarnings("unchecked")
-			List<Exam> list = session.createQuery("FROM Exam exam WHERE exam.id = :id").setParameter("id", id).list();
+			Exam exam = (Exam) session.createQuery("FROM Exam exam WHERE exam.id = :id").setParameter("id", id).uniqueResult();
 			session.close();
-			return (list.size() == 0) ? null : list.get(0);
+			return exam;
 		} catch (Exception e) {
-			System.exit(0);
-			return null;
+			Error.reportErrorMessageWithException(e, Message.FIND_EXAM_BY_ID_ERROR.getValue());
 		}
+		return null;
 	}
 
 	public Exam findOneByName(String name) {
-		Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
-		@SuppressWarnings("unchecked")
-		List<Exam> list = session.createQuery("FROM Exam exam WHERE exam.name = :name").setParameter("name", name).list();
-		session.close();
-		return (list.size() == 0) ? null : list.get(0);
-	}
-
-	public void addExamQuestion(Exam exam, Question question) {
-		exam = findOneById(exam.getId());
-		for (Question examQuestion : exam.getQuestions()) {
-			if (examQuestion.getId() == question.getId())
-				return;
-		}
-		try {
-			exam.getQuestions().add(question);
-			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
-			session.beginTransaction();
-			session.update(exam);
-			session.getTransaction().commit();
-			session.close();
-		} catch (Exception e) {
-			Error.reportErrorMessage("");
-			System.exit(0);
-		}
-	}
-
-	public void deleteExamQuestion(Exam exam, Question question) {
-		for (Question examQuestion : exam.getQuestions()) {
-			if (examQuestion.getId() == question.getId()) {
-				exam.getQuestions().remove(examQuestion);
-				break;
-			}
-		}
 		try {
 			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
-			session.beginTransaction();
-			session.update(exam);
-			session.getTransaction().commit();
+			Exam exam = (Exam) session.createQuery("FROM Exam exam WHERE exam.name = :name").setParameter("name", name).uniqueResult();
 			session.close();
+			return exam;
 		} catch (Exception e) {
-			Error.reportErrorMessage("");
-			System.exit(0);
+			Error.reportErrorMessageWithException(e, Message.FIND_EXAM_BY_NAME_ERROR.getValue());
 		}
-	}
-
-	public void deleteExamsQuestion(Question question) {
-		List<Exam> exams = findAll();
-		for (Exam exam : exams) {
-			for (Question examQuestion : exam.getQuestions()) {
-				if (examQuestion.getId() == question.getId()) {
-					deleteExamQuestion(exam, question);
-					break;
-				}
-			}
-		}
+		return null;
 	}
 
 	public Exam save(Exam exam) {
 		try {
 			Exam examExist = findOneByName(exam.getName());
-			if (examExist != null)
-				return examExist;
+			if (examExist != null) {
+				Error.reportErrorMessage(Message.EXAM_NAME_ALLREADY_EXIST_ERROR.getValue());
+				return null;
+			}
 			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
 			session.beginTransaction();
 			exam.setId((Integer) session.save(exam));
 			session.getTransaction().commit();
 			session.close();
 			return exam;
-
 		} catch (Exception e) {
-			Error.reportErrorMessage("");
-			System.exit(0);
-			return null;
+			Error.reportErrorMessageWithException(e, Message.SAVE_EXAM_ERROR.getValue());
 		}
+		return null;
 	}
 
-	public void update(Exam exam) {
+	public Exam update(Exam exam) {
 		try {
+			Exam examExist = findOneByName(exam.getName());
+			if (examExist != null) {
+				Error.reportErrorMessage(Message.EXAM_NAME_ALLREADY_EXIST_ERROR.getValue());
+				return null;
+			}
 			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
 			session.beginTransaction();
 			session.update(exam);
 			session.getTransaction().commit();
 			session.close();
+			return exam;
 		} catch (Exception e) {
-			Error.reportErrorMessage("");
-			System.exit(0);
+			Error.reportErrorMessageWithException(e, Message.UPDATE_EXAM_ERROR.getValue());
 		}
+		return null;
 	}
 
 	public void delete(Exam exam) {
 		try {
-			while (!exam.getQuestions().isEmpty())
-				deleteExamQuestion(exam, exam.getQuestions().get(0));
 			ExamPercentageRepository.getInstance().delete(exam.getId());
 			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
 			session.beginTransaction();
@@ -149,8 +104,7 @@ public class ExamRepository {
 			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
-			Error.reportErrorMessage("");
-			System.exit(0);
+			Error.reportErrorMessageWithException(e, Message.DELETE_EXAM_ERROR.getValue());
 		}
 	}
 }

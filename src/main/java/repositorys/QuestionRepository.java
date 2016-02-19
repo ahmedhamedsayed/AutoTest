@@ -10,8 +10,6 @@ public interface QuestionRepository {
 
     Question findOneById(int id);
 
-    Question findOneByDescription(String description);
-
     Question save(Question question);
 
     void update(Question question);

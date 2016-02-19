@@ -3,11 +3,10 @@ package services;
 import java.util.ArrayList;
 import java.util.List;
 
+import constants.Message;
 import models.Question;
 import models.Unit;
-import constants.Message;
 import repositorys.UnitRepository;
-import util.shape.Error;
 import util.shape.InputDialog;
 import util.shape.Success;
 
@@ -22,12 +21,7 @@ public class UnitService {
 	}
 
 	public List<Unit> getAllUnits() {
-		try {
-			return UnitRepository.getInstance().findAll();
-		} catch (Exception e) {
-			Error.reportErrorMessageWithException(e, Message.GET_ALL_UNIT_ERROR.getValue());
-		}
-		return null;
+		return UnitRepository.getInstance().findAll();
 	}
 
 	public List<Question> getUnitQuesiton(Unit unit) {
@@ -46,8 +40,9 @@ public class UnitService {
 			Unit unit = new Unit();
 			unit.setDescription(newName);
 			unit.setPassword(newPassword);
-			UnitRepository.getInstance().save(unit);
-			Success.reportSuccessMessage("");
+			unit = UnitRepository.getInstance().save(unit);
+			if (unit != null)
+				Success.reportSuccessMessage(Message.UNIT_SAVED_SUCCESSFULLY.getValue());
 		}
 	}
 
@@ -60,7 +55,8 @@ public class UnitService {
 				unit.setDescription(newName);
 				unit.setPassword(newPassword);
 				UnitRepository.getInstance().update(unit);
-				Success.reportSuccessMessage("");
+				if (unit != null)
+					Success.reportSuccessMessage(Message.UNIT_UPDATED_SUCCESSFULLY.getValue());
 			}
 		}
 	}
@@ -68,6 +64,8 @@ public class UnitService {
 	public void deleteUnit(Unit unit) {
 		String password = InputDialog.create("Enter Unit Password");
 		if (unit != null && unit.getPassword().equals(password)) {
+			for (Question question : unit.getQuestions())
+				QuestionService.getInstance().deleteQuestion(question);
 			UnitRepository.getInstance().delete(unit);
 			Success.reportSuccessMessage("");
 		}

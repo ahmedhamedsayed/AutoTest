@@ -4,11 +4,11 @@ import java.util.List;
 
 import models.Student;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 
 import util.shape.Error;
 import configuration.databaseConfiguration.DatabaseEngine;
+import constants.Message;
 
 public class StudentRepository {
 
@@ -28,8 +28,9 @@ public class StudentRepository {
 			session.close();
 			return students;
 		} catch (Exception e) {
-			return null;
+			Error.reportErrorMessageWithException(e, Message.FIND_ALL_STUDENTS_ERROR.getValue());
 		}
+		return null;
 	}
 
 	public Student save(Student student) {
@@ -41,16 +42,8 @@ public class StudentRepository {
 			session.close();
 			return student;
 		} catch (Exception e) {
-			Error.reportErrorMessage(""/*Message.saveExamError*/);
-			System.exit(0);
-			return null;
+			Error.reportErrorMessageWithException(e, Message.SAVE_STUDENT_ERROR.getValue());
 		}
-	}
-
-	public void deleteAll(String databasePath) {
-		Session session = DatabaseEngine.getInstance().getSession(databasePath);
-		Query query = session.createQuery("DELETE FROM Student");
-		query.executeUpdate();
-		session.close();
+		return null;
 	}
 }

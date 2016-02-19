@@ -9,6 +9,6 @@
         <property name="hibernate.connection.password"></property>
         <property name="hibernate.dialect">configuration.databaseConfiguration.SQLiteDialect</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
-        <mapping class="exam.examexecute.Student"/>
+        <mapping class="models.Student"/>
     </session-factory>
 </hibernate-configuration>

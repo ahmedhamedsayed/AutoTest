@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import constants.MainState;
@@ -24,6 +25,23 @@ public class ExamService {
 		return examService;
 	}
 
+	private void addExamQuestion(Exam exam, Question question) {
+		for (Question examQuestion : exam.getQuestions())
+			if (examQuestion.getId() == question.getId())
+				return;
+		exam.getQuestions().add(question);
+		ExamRepository.getInstance().update(exam);
+	}
+
+	private void deleteExamQuestion(Exam exam, Question question) {
+		for (Question examQuestion : exam.getQuestions())
+			if (examQuestion.getId() == question.getId()) {
+				exam.getQuestions().remove(examQuestion);
+				break;
+			}
+		ExamRepository.getInstance().update(exam);
+	}
+
 	public List<Exam> getAllExams() {
 		return ExamRepository.getInstance().findAll();
 	}
@@ -40,7 +58,9 @@ public class ExamService {
 
 	public void deleteExamsQuestion(Question question) {
 		if (question != null) {
-			ExamRepository.getInstance().deleteExamsQuestion(question);
+			List<Exam> exams = getAllExams();
+			for (Exam exam : exams)
+				deleteExamQuestion(exam, question);
 			Success.reportSuccessMessage("");
 		}
 	}
@@ -52,14 +72,16 @@ public class ExamService {
 				Unit unit = AdminService.getInstance().getSelectedUnit();
 				if (unit != null) {
 					List<Question> questions = UnitService.getInstance().getUnitQuesiton(unit);
-					for (Question question : questions)
-						ExamRepository.getInstance().addExamQuestion(exam, question);
+					for (Question question : questions) {
+						addExamQuestion(exam, question);
+					}
+					ExamRepository.getInstance().update(exam);
 					Success.reportSuccessMessage("");
 				}
 			} else {
 				Question question = AdminService.getInstance().getSelectedQuestion();
 				if (question != null) {
-					ExamRepository.getInstance().addExamQuestion(exam, question);
+					addExamQuestion(exam, question);
 					Success.reportSuccessMessage("");
 				}
 			}
@@ -84,6 +106,8 @@ public class ExamService {
 	public void examDelete() {
 		Exam exam = AdminService.getInstance().getSelectedExam();
 		if (exam != null) {
+			exam.setQuestions(new ArrayList<Question>());
+			ExamRepository.getInstance().update(exam);
 			ExamRepository.getInstance().delete(exam);
 			AdminService.getInstance().refreshAdminExams();
 			Success.reportSuccessMessage("");
@@ -99,7 +123,7 @@ public class ExamService {
 		Exam exam = AdminService.getInstance().getSelectedExam();
 		Question question = ExamUI.getInstance().getSelectedQuestion();
 		if (question != null) {
-			ExamRepository.getInstance().deleteExamQuestion(exam, question);
+			deleteExamQuestion(exam, question);
 			refreshExamQuestion();
 			Success.reportSuccessMessage("");
 		}

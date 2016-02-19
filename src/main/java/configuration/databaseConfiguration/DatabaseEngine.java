@@ -15,11 +15,11 @@ public class DatabaseEngine {
 
 	private static DatabaseEngine databaseEngine;
 	private HashMap<String, SessionFactory> databasesSessionFactory;
-	
+
 	public DatabaseEngine() {
 		databasesSessionFactory = new HashMap<String, SessionFactory>();
 	}
-	
+
 	public static synchronized DatabaseEngine getInstance() {
 		if (databaseEngine == null)
 			return databaseEngine = new DatabaseEngine();
@@ -27,9 +27,6 @@ public class DatabaseEngine {
 	}
 
 	public void configureDatabase(String configFile, String databasePath) {
-		if (databasesSessionFactory.containsKey(databasePath)) {
-			return;
-		}
 		try {
 			Configuration configuration = new Configuration();
 			configuration.configure("META-INF/" + configFile);
@@ -39,24 +36,22 @@ public class DatabaseEngine {
 			databasesSessionFactory.put(databasePath, sessionFactory);
 		} catch (Exception e) {
 			Error.reportErrorMessageWithException(e, Message.OPEN_DATABASE_CONNECTION_ERROR.getValue());
-			System.exit(0);
 		}
 	}
-	
+
 	public Session getMainDatabaseSession() {
 		return getSession(Message.MAIN_DATABASE_PATH.getValue());
 	}
-	
+
 	public Session getStudentDatabaseSession() {
 		return getSession(Message.STUDENT_DATABASE_PATH.getValue());
 	}
-	
+
 	public Session getSession(String databasePath) {
 		try {
 			return databasesSessionFactory.get(databasePath).openSession();
 		} catch (Exception e) {
 			Error.reportErrorMessageWithException(e, Message.OPEN_DATABASE_SESSION_ERROR.getValue());
-			System.exit(0);
 		}
 		return null;
 	}

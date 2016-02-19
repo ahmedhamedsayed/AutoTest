@@ -11,6 +11,7 @@ import org.hibernate.Session;
 
 import util.shape.Error;
 import configuration.databaseConfiguration.DatabaseEngine;
+import constants.Message;
 
 public class ChooseRepository implements QuestionRepository {
 
@@ -23,56 +24,49 @@ public class ChooseRepository implements QuestionRepository {
 	}
 
 	public List<Question> findAll() {
-		Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
-		@SuppressWarnings("unchecked")
-		List<Choose> list = session.createQuery("FROM Choose").list();
-		List<Question> result = new ArrayList<Question>();
-		for (Choose choose : list)
-			result.add(choose);
-		session.close();
-		return result;
+		try {
+			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
+			@SuppressWarnings("unchecked")
+			List<Question> chooses = session.createQuery("FROM Choose").list();
+			session.close();
+			return chooses;
+		} catch (Exception e) {
+			Error.reportErrorMessageWithException(e, Message.FIND_ALL_CHOOSES_ERROR.getValue());
+		}
+		return null;
 	}
 
 	public Question findOneById(int id) {
 		try {
 			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
-			@SuppressWarnings("unchecked")
-			List<Choose> list = session.createQuery("FROM Choose choose WHERE choose.id = :id").setParameter("id", id).list();
+			Choose choose = (Choose) session.createQuery("FROM Choose choose WHERE choose.id = :id").setParameter("id", id).uniqueResult();
 			session.close();
-			return (list.size() == 0) ? null : list.get(0);
+			return choose;
 		} catch (Exception e) {
-			Error.reportErrorMessage("");
-			System.exit(0);
-			return null;
+			Error.reportErrorMessageWithException(e, Message.FIND_CHOOSE_BY_ID_ERROR.getValue());
 		}
-	}
-
-	public Question findOneByDescription(String description) {
-		Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
-		@SuppressWarnings("unchecked")
-		List<Choose> list = session.createQuery("FROM Choose choose WHERE choose.description = :description")
-				.setParameter("description", description).list();
-		session.close();
-		return (list.size() == 0) ? null : list.get(0);
+		return null;
 	}
 
 	public Question save(Question question) {
-		Choose choose = (Choose) question;
-		Choose chooseExist = (Choose) findOneByDescription(choose.getDescription());
-		if (chooseExist != null)
-			return chooseExist;
-		Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
-		session.beginTransaction();
-		choose.setId((Integer) session.save(choose));
-		session.getTransaction().commit();
-		session.close();
-		List<Choice> choices = new ArrayList<Choice>();
-		for (Choice choice : choose.getChoices()) {
-			choice.setChoose(choose);
-			choices.add(ChoiceRepository.getInstance().save(choice));
+		try {
+			Choose choose = (Choose) question;
+			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
+			session.beginTransaction();
+			choose.setId((Integer) session.save(choose));
+			session.getTransaction().commit();
+			session.close();
+			List<Choice> choices = new ArrayList<Choice>();
+			for (Choice choice : choose.getChoices()) {
+				choice.setChoose(choose);
+				choices.add(ChoiceRepository.getInstance().save(choice));
+			}
+			choose.setChoices(choices);
+			return choose;
+		} catch (Exception e) {
+			Error.reportErrorMessageWithException(e, Message.SAVE_CHOOSE_ERROR.getValue());
 		}
-		choose.setChoices(choices);
-		return choose;
+		return null;
 	}
 
 	public void update(Question question) {
@@ -90,8 +84,7 @@ public class ChooseRepository implements QuestionRepository {
 			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
-			Error.reportErrorMessage("");
-			System.exit(0);
+			Error.reportErrorMessageWithException(e, Message.DELETE_CHOOSE_ERROR.getValue());
 		}
 	}
 }
