@@ -33,6 +33,7 @@ public enum Message {
 	ASK_UNIT_NEW_PASSWORD("ادخل كلمة السر الجديده للوحده"),
 	ASK_UNIT_PASSWORD("أدخل كلمة السر للوحده"),
 	DELETE_UNIT_CONFIRM("هل تريد مسح الوحده ؟"),
+	DELETE_UNIT_SUCCESSFULLY("تم مسح الوحده بنجاح"),
 	
 	DELETE_QUESTION_CONFIRM("هل تريد مسح السؤال ؟"),
 	

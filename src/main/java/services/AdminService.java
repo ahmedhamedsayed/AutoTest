@@ -79,8 +79,14 @@ public class AdminService {
 
 	public void adminUpdate() {
 		if (MainService.getInstance().getCurrentState().equals(MainState.AdminUnits)) {
-			UnitService.getInstance().updateUnit(getSelectedUnit());
-			refreshAdminUnits();
+			Unit selectedUnit = getSelectedUnit();
+			if (selectedUnit != null) {
+				boolean allow = InputDialog.createToWaitPassword(Message.ASK_UNIT_PASSWORD.getValue(), selectedUnit.getPassword());
+				if (allow) {
+					UnitService.getInstance().updateUnit(selectedUnit);
+					refreshAdminUnits();
+				}
+			}
 		} else {
 			MainService.getInstance().nextState(MainState.AdminUpdateQuestion);
 			QuestionService.getInstance().openQuestion(getSelectedQuestion(), new TimerCountDown(0, 0, 0));
@@ -90,12 +96,15 @@ public class AdminService {
 	public void adminDelete() {
 		if (MainService.getInstance().getCurrentState().equals(MainState.AdminUnits)) {
 			Unit selectedUnit = getSelectedUnit();
-			if (selectedUnit != null && ConfirmMessage.confirmMessage(Message.DELETE_UNIT_CONFIRM.getValue())) {
-				List<Question> questions = UnitService.getInstance().getUnitQuesiton(selectedUnit);
-				for (Question question : questions)
-					ExamService.getInstance().deleteExamsQuestion(question);
-				UnitService.getInstance().deleteUnit(selectedUnit);
-				refreshAdminUnits();
+			if (selectedUnit != null) {
+				boolean allow = InputDialog.createToWaitPassword(Message.ASK_UNIT_PASSWORD.getValue(), selectedUnit.getPassword());
+				if (allow && ConfirmMessage.confirmMessage(Message.DELETE_UNIT_CONFIRM.getValue())) {
+					List<Question> questions = UnitService.getInstance().getUnitQuesiton(selectedUnit);
+					for (Question question : questions)
+						ExamService.getInstance().deleteExamsQuestion(question);
+					UnitService.getInstance().deleteUnit(selectedUnit);
+					refreshAdminUnits();
+				}
 			}
 		} else {
 			Question selectedQuestion = getSelectedQuestion();
@@ -114,8 +123,8 @@ public class AdminService {
 	}
 
 	public void adminOut() {
-		// if (ConfirmMessage.confirmMessage(Message.existSystemConfirm)) {
-		// System.exit(0);
-		// }
+		if (ConfirmMessage.confirmMessage(Message.EXIST_SYSTEM_CONFIRM_MESSAGE.getValue())) {
+			System.exit(0);
+		}
 	}
 }

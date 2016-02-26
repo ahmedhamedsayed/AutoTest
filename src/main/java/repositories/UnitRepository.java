@@ -85,16 +85,6 @@ public class UnitRepository {
 
 	public Unit update(Unit unit) {
 		try {
-			Unit unitDescriptionExist = findOneByDescription(unit.getDescription());
-			if (unitDescriptionExist != null && unitDescriptionExist.getId() != unit.getId()) {
-				Error.reportErrorMessage(Message.UNIT_DESCRIPTION_ALLREADY_EXIST_ERROR.getValue());
-				return null;
-			}
-			Unit unitPasswordExist = findOneByPassword(unit.getPassword());
-			if (unitPasswordExist != null && unitPasswordExist.getId() != unit.getId()) {
-				Error.reportErrorMessage(Message.UNIT_PASSWORD_ALLREADY_EXIST_ERROR.getValue());
-				return null;
-			}
 			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
 			session.beginTransaction();
 			session.update(unit);
