@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.commons.lang.math.NumberUtils;
+
 import constants.MainState;
+import constants.Message;
 import models.Exam;
 import models.ExamPercentage;
 import models.Question;
@@ -40,12 +43,12 @@ public class ExamExecuteService {
 	private void startExam(Exam exam, List<Question> questions) {
 		MainService.getInstance().nextState(MainState.StudentShowQuestion);
 		this.questions = questions;
-		examId = exam.getId();
-		examMark = exam.getMark();
-		totalStudentMark = 0;
-		timerCountDown = new TimerCountDown(exam.getHour(), exam.getMinute(), 0);
-		index = 0;
-		QuestionService.getInstance().openQuestion(this.questions.get(index), timerCountDown);
+		this.examId = exam.getId();
+		this.examMark = exam.getMark();
+		this.totalStudentMark = 0;
+		this.timerCountDown = new TimerCountDown(exam.getHour(), exam.getMinute(), 0);
+		this.index = 0;
+		QuestionService.getInstance().openQuestion(this.questions.get(this.index), this.timerCountDown);
 	}
 
 	private void saveResult() {
@@ -63,7 +66,7 @@ public class ExamExecuteService {
 	private void updateResult() {
 		totalStudentMark += questions.get(index).getQuestionUI().getMark();
 	}
-	
+
 	public int useExam(List<Question> questions, int examId, int questionsNumber) {
 		Exam exam = ExamRepository.getInstance().findOneById(examId);
 		int questionsTaken = Math.min(questionsNumber, exam.getQuestions().size());
@@ -82,21 +85,27 @@ public class ExamExecuteService {
 
 	public void executeExam(String password) {
 		Exam exam = findExamByPassword(password);
-		if (exam == null)
-			Error.reportErrorMessage("Invalid exam password");
-		else {
-			studentId = InputDialog.create("Enter Student Id");
-			if (studentId != null & !studentId.trim().isEmpty()) {
-				int questionsNumber = exam.getQuestionsNumber(), questionsTaken = 0;
-				List<Question> questions = new ArrayList<Question>();
-				for (ExamPercentage examPercentage : exam.getExamPercentages()) {
-					int currentQuestionsNumber = (int) Math.round(questionsNumber * (examPercentage.getPercentage() / 100.0));
-					questionsTaken += useExam(questions, examPercentage.getAnotherExamId(), currentQuestionsNumber);
-				}
-				questionsTaken += useExam(questions, exam.getId(), questionsNumber - questionsTaken);
-				startExam(exam, questions);
-			}
+		if (exam == null) {
+			Error.reportErrorMessage(Message.PASSWORD_WRONG.getValue());
+			return;
 		}
+		while (true) {
+			studentId = InputDialog.create(Message.ASK_STUDENT_ID.getValue());
+			if (studentId == null)
+				return;
+			if (studentId.trim().isEmpty() || !NumberUtils.isNumber(studentId))
+				Error.reportErrorMessage(Message.STUDENT_ID_NOT_NUMBER_ERROR.getValue());
+			else
+				break;
+		}
+		int questionsNumber = exam.getQuestionsNumber(), questionsTaken = 0;
+		List<Question> questions = new ArrayList<Question>();
+		for (ExamPercentage examPercentage : exam.getExamPercentages()) {
+			int currentQuestionsNumber = (int) Math.round(questionsNumber * (examPercentage.getPercentage() / 100.0));
+			questionsTaken += useExam(questions, examPercentage.getAnotherExamId(), currentQuestionsNumber);
+		}
+		questionsTaken += useExam(questions, exam.getId(), questionsNumber - questionsTaken);
+		startExam(exam, questions);
 	}
 
 	public boolean isInEnd() {

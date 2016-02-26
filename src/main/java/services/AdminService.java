@@ -3,6 +3,7 @@ package services;
 import java.util.List;
 
 import constants.MainState;
+import constants.Message;
 import models.Exam;
 import models.Question;
 import models.Unit;
@@ -26,7 +27,6 @@ public class AdminService {
 	}
 
 	public void refreshAdminQuestions() {
-		MainService.getInstance().nextState(MainState.AdminQuestions);
 		AdminUI.getInstance().setQuestions(UnitService.getInstance().getUnitQuesiton(getSelectedUnit()));
 	}
 
@@ -54,9 +54,13 @@ public class AdminService {
 
 	public void adminNext() {
 		if (MainService.getInstance().getCurrentState().equals(MainState.AdminUnits)) {
-			String password = InputDialog.create("Enter Old Unit Password");
-			if (getSelectedUnit() != null && getSelectedUnit().getPassword().equals(password)) {
-				refreshAdminQuestions();
+			Unit selectedUnit = getSelectedUnit();
+			if (selectedUnit != null) {
+				boolean allow = InputDialog.createToWaitPassword(Message.ASK_UNIT_PASSWORD.getValue(), selectedUnit.getPassword());
+				if (allow) {
+					MainService.getInstance().nextState(MainState.AdminQuestions);
+					refreshAdminQuestions();
+				}
 			}
 		} else {
 			MainService.getInstance().nextState(MainState.AdminShowQuestion);
@@ -85,18 +89,19 @@ public class AdminService {
 
 	public void adminDelete() {
 		if (MainService.getInstance().getCurrentState().equals(MainState.AdminUnits)) {
-			if (ConfirmMessage.confirmMessage(""/*Message.deleteUnitConfirm*/)) {
-				List<Question> questions = UnitService.getInstance().getUnitQuesiton(getSelectedUnit());
-				for (Question question : questions) {
+			Unit selectedUnit = getSelectedUnit();
+			if (selectedUnit != null && ConfirmMessage.confirmMessage(Message.DELETE_UNIT_CONFIRM.getValue())) {
+				List<Question> questions = UnitService.getInstance().getUnitQuesiton(selectedUnit);
+				for (Question question : questions)
 					ExamService.getInstance().deleteExamsQuestion(question);
-				}
-				UnitService.getInstance().deleteUnit(getSelectedUnit());
+				UnitService.getInstance().deleteUnit(selectedUnit);
 				refreshAdminUnits();
 			}
 		} else {
-			if (ConfirmMessage.confirmMessage(""/*Message.deleteQuestionConfirm*/)) {
-				ExamService.getInstance().deleteExamsQuestion(getSelectedQuestion());
-				QuestionService.getInstance().deleteQuestion(getSelectedQuestion());
+			Question selectedQuestion = getSelectedQuestion();
+			if (selectedQuestion != null && ConfirmMessage.confirmMessage(Message.DELETE_QUESTION_CONFIRM.getValue())) {
+				ExamService.getInstance().deleteExamsQuestion(selectedQuestion);
+				QuestionService.getInstance().deleteQuestion(selectedQuestion);
 				refreshAdminQuestions();
 			}
 		}
@@ -109,8 +114,8 @@ public class AdminService {
 	}
 
 	public void adminOut() {
-//		if (ConfirmMessage.confirmMessage(Message.existSystemConfirm)) {
-//			System.exit(0);
-//		}
+		// if (ConfirmMessage.confirmMessage(Message.existSystemConfirm)) {
+		// System.exit(0);
+		// }
 	}
 }

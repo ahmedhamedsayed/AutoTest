@@ -10,7 +10,7 @@ public enum Message {
 	GENERAL_BACK_GROUND_PATH("Images/GBG.jpg"),
 	QUESTION_BACK_GROUND_PATH("Images/QBG.jpg"),
 
-	PASSWORDWRONG("كلمة السر خطأ"),
+	PASSWORD_WRONG("كلمة السر خطأ"),
 	ASK_ADMIN_PASSWORD("أدخل كلمة السر للأدمن"),
 	ADMIN_PASSWORD("admin"),
 	ASK_TEACHER_PASSWORD("أدخل كلمة السر للمدرس"),
@@ -23,10 +23,18 @@ public enum Message {
 	SAVE_UNIT_ERROR("خطأ أثناء محاولة حفظ وحده في قاعدة البيانات"),
 	UPDATE_UNIT_ERROR("خطأ أثناء محاولة تعديل وحده في قاعدة البيانات"),
 	DELETE_UNIT_ERROR("خطأ أثناء محاولة مسح وحده من قاعدة البيانات"),
+	UNIT_DESCRIPTION_INVALID_ERROR("اسم الوحده فارغ"),
+	UNIT_PASSWORD_INVALID_ERROR("كلمة سر الوحده فارغ"),
 	UNIT_DESCRIPTION_ALLREADY_EXIST_ERROR("اسم الوحده مستخدم بالفعل"),
 	UNIT_PASSWORD_ALLREADY_EXIST_ERROR("برجاء ادخال كلمة سر اخري"),
 	UNIT_SAVED_SUCCESSFULLY("تم حفظ الوحده بنجاح"),
 	UNIT_UPDATED_SUCCESSFULLY("تم تعديل الوحده بنجاح"),
+	ASK_UNIT_DESCRIPTION("أدخل اسم الوحده"),
+	ASK_UNIT_NEW_PASSWORD("ادخل كلمة السر الجديده للوحده"),
+	ASK_UNIT_PASSWORD("أدخل كلمة السر للوحده"),
+	DELETE_UNIT_CONFIRM("هل تريد مسح الوحده ؟"),
+	
+	DELETE_QUESTION_CONFIRM("هل تريد مسح السؤال ؟"),
 	
 	FIND_ALL_CHOOSES_ERROR("خطأ أثناء احضار أسئلة اختر من قاعدة البيانات"),
 	FIND_CHOOSE_BY_ID_ERROR("خطأ أثناء محاولة ايجاد سؤال اختر من قاعدة البيانات بوسطة رقم السؤال"),
@@ -48,14 +56,19 @@ public enum Message {
 	DELETE_EXAM_PERCENTAGE_ERROR("خطأ أثناء محاولة مسح نسبة امتحان اخر من قاعدة البيانات"),
 	DELETE_EXAMS_PERCENTAGE_BY_EXAM_ID_ERROR("خطأ أثناء محاولة مسح نسب امتحانات اخري من قاعدة البيانات"),
 	EXAM_NAME_ALLREADY_EXIST_ERROR("اسم الامتحان مستخدم بالفعل"),
+	ASK_EXAM_PASSWORD("أدخل كلمة السر للامتحان"),
 	
 	FIND_ALL_STUDENTS_ERROR("خطأ أثناء محاولة احضار الطلاب من قاعدة البيانات"),
 	SAVE_STUDENT_ERROR("خطأ أثناء محاولة حفظ طالب في قاعدة البيانات"),
+	ASK_STUDENT_ID("أدخل رقم جلوس الطالب"),
+	STUDENT_ID_NOT_NUMBER_ERROR("خطأ رقم الجلوس فارغ او ليس رقم"),
 	
 	FINAL_SHEET_PATH_CHOOSER_MESSAGE("أختر المكان لدمج الملفات"),
 	FINAL_SHEET_HEADER_ID_COLUMN("رقم الجلوس"),
 	FINAL_SHEET_HEADER_MARK("الدرجه"),
-	FINAL_SHEET_HEADER_EXAM_NAME("اسم الامتحان");
+	FINAL_SHEET_HEADER_EXAM_NAME("اسم الامتحان"),
+	
+	EXIST_SYSTEM_CONFIRM_MESSAGE("هل تريد الخروج من البرنامج ؟");
 
 	private String value;
 

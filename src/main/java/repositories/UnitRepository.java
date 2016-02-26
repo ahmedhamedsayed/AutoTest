@@ -71,16 +71,6 @@ public class UnitRepository {
 
 	public Unit save(Unit unit) {
 		try {
-			Unit unitDescriptionExist = findOneByDescription(unit.getDescription());
-			if (unitDescriptionExist != null) {
-				Error.reportErrorMessage(Message.UNIT_DESCRIPTION_ALLREADY_EXIST_ERROR.getValue());
-				return null;
-			}
-			Unit unitPasswordExist = findOneByPassword(unit.getPassword());
-			if (unitPasswordExist != null) {
-				Error.reportErrorMessage(Message.UNIT_PASSWORD_ALLREADY_EXIST_ERROR.getValue());
-				return null;
-			}
 			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
 			session.beginTransaction();
 			unit.setId((Integer) session.save(unit));

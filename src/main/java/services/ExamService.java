@@ -12,7 +12,6 @@ import repositories.ExamPercentageRepository;
 import repositories.ExamRepository;
 import ui.ExamUI;
 import util.shape.InputDialog;
-import util.shape.Success;
 import util.shape.TimerCountDown;
 
 public class ExamService {
@@ -61,7 +60,6 @@ public class ExamService {
 			List<Exam> exams = getAllExams();
 			for (Exam exam : exams)
 				deleteExamQuestion(exam, question);
-			Success.reportSuccessMessage("");
 		}
 	}
 
@@ -76,13 +74,11 @@ public class ExamService {
 						addExamQuestion(exam, question);
 					}
 					ExamRepository.getInstance().update(exam);
-					Success.reportSuccessMessage("");
 				}
 			} else {
 				Question question = AdminService.getInstance().getSelectedQuestion();
 				if (question != null) {
 					addExamQuestion(exam, question);
-					Success.reportSuccessMessage("");
 				}
 			}
 		}
@@ -110,7 +106,6 @@ public class ExamService {
 			ExamRepository.getInstance().update(exam);
 			ExamRepository.getInstance().delete(exam);
 			AdminService.getInstance().refreshAdminExams();
-			Success.reportSuccessMessage("");
 		}
 	}
 
@@ -125,17 +120,14 @@ public class ExamService {
 		if (question != null) {
 			deleteExamQuestion(exam, question);
 			refreshExamQuestion();
-			Success.reportSuccessMessage("");
 		}
 	}
 
 	public void examDone() {
 		if (MainService.getInstance().getCurrentState().equals(MainState.AdminNewExam)) {
 			ExamRepository.getInstance().save(ExamUI.getInstance().getExam());
-			Success.reportSuccessMessage("");
 		} else if (MainService.getInstance().getCurrentState().equals(MainState.AdminUpdateExam)) {
 			ExamRepository.getInstance().update(ExamUI.getInstance().getExam());
-			Success.reportSuccessMessage("");
 		}
 	}
 

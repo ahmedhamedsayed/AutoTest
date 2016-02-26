@@ -2,7 +2,6 @@ package services;
 
 import constants.Message;
 import util.shape.ConfirmMessage;
-import util.shape.Error;
 import util.shape.InputDialog;
 
 public class LoginService {
@@ -16,43 +15,25 @@ public class LoginService {
 	}
 
 	public void loginAdmin() {
-		while (true) {
-			String password = InputDialog.create(Message.ASK_ADMIN_PASSWORD.getValue());
-			if (password == null) {
-				break;
-			}
-			if (Message.ADMIN_PASSWORD.getValue().equals(password)) {
-				AdminService.getInstance().openAdmin();
-				break;
-			} else {
-				Error.reportErrorMessage(Message.PASSWORDWRONG.getValue());
-			}
-		}
+		boolean allow = InputDialog.createToWaitPassword(Message.ASK_ADMIN_PASSWORD.getValue(), Message.ADMIN_PASSWORD.getValue());
+		if (allow)
+			AdminService.getInstance().openAdmin();
 	}
 
 	public void loginTeacher() {
-		while (true) {
-			String password = InputDialog.create(Message.ASK_TEACHER_PASSWORD.getValue());
-			if (password == null) {
-				break;
-			}
-			if (Message.TEACHER_PASSWORD.getValue().equals(password)) {
-				TeacherService.getInstance().generateFinalSheet();
-				break;
-			} else {
-				Error.reportErrorMessage(Message.PASSWORDWRONG.getValue());
-			}
-		}
+		boolean allow = InputDialog.createToWaitPassword(Message.ASK_TEACHER_PASSWORD.getValue(), Message.TEACHER_PASSWORD.getValue());
+		if (allow)
+			TeacherService.getInstance().generateFinalSheet();
 	}
 
 	public void loginUser() {
-		String password = InputDialog.create("Enter Exam Password");
+		String password = InputDialog.create(Message.ASK_EXAM_PASSWORD.getValue());
 		if (password != null)
 			ExamExecuteService.getInstance().executeExam(password);
 	}
 
 	public void loginOut() {
-		if (ConfirmMessage.confirmMessage(""/*Message.existSystemConfirm*/)) {
+		if (ConfirmMessage.confirmMessage(Message.EXIST_SYSTEM_CONFIRM_MESSAGE.getValue())) {
 			System.exit(0);
 		}
 	}
