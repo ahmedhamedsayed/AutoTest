@@ -14,7 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import repositorys.QuestionRepository;
+import repositories.QuestionRepository;
 import ui.QuestionUI;
 
 @Entity

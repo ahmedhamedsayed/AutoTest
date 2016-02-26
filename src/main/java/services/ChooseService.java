@@ -1,7 +1,7 @@
 package services;
 
 import models.Choose;
-import repositorys.ChooseRepository;
+import repositories.ChooseRepository;
 import ui.ChooseUI;
 import constants.MainState;
 

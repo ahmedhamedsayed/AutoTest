@@ -9,8 +9,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import repositorys.ChooseRepository;
-import repositorys.QuestionRepository;
+import repositories.ChooseRepository;
+import repositories.QuestionRepository;
 import ui.ChooseUI;
 import ui.QuestionUI;
 

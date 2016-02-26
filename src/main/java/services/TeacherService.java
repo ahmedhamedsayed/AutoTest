@@ -8,8 +8,8 @@ import java.util.Map.Entry;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import repositorys.ExamRepository;
-import repositorys.StudentRepository;
+import repositories.ExamRepository;
+import repositories.StudentRepository;
 import models.Exam;
 import models.Student;
 import util.shape.Chooser;

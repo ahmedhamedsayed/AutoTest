@@ -1,4 +1,4 @@
-package repositorys;
+package repositories;
 
 import java.util.ArrayList;
 import java.util.List;

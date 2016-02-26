@@ -1,6 +1,6 @@
-package repositorys;
+package repositories;
 
-import models.Law;
+import models.LawAnswer;
 
 import org.hibernate.Session;
 
@@ -9,37 +9,37 @@ import configuration.databaseConfiguration.DatabaseEngine;
 /**
  * Created by Ahmed Hamed on 8/23/2015.
  */
-public class LawRepository {
+public class LawAnswerRepository {
 
-    private static LawRepository lawRepository;
+    private static LawAnswerRepository lawAnswerRepository;
 
-    public static synchronized LawRepository getInstance() {
-        if (lawRepository == null)
-            return lawRepository = new LawRepository();
-        return lawRepository;
+    public static synchronized LawAnswerRepository getInstance() {
+        if (lawAnswerRepository == null)
+            return lawAnswerRepository = new LawAnswerRepository();
+        return lawAnswerRepository;
     }
 
-    public Law save(Law law) {
+    public LawAnswer save(LawAnswer lawAnswer) {
         Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
         session.beginTransaction();
-        law.setId((Integer) session.save(law));
+        lawAnswer.setId((Integer) session.save(lawAnswer));
         session.getTransaction().commit();
         session.close();
-        return law;
+        return lawAnswer;
     }
 
-    public void update(Law law) {
+    public void update(LawAnswer lawAnswer) {
         Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
         session.beginTransaction();
-        session.update(law);
+        session.update(lawAnswer);
         session.getTransaction().commit();
         session.close();
     }
 
-    public void delete(Law law) {
+    public void delete(LawAnswer lawAnswer) {
         Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
         session.beginTransaction();
-        session.delete(law);
+        session.delete(lawAnswer);
         session.getTransaction().commit();
         session.close();
     }
