@@ -15,8 +15,6 @@ public interface QuestionUI {
     
     JPanel getPanel();
 
-    void moveFocus();
-    
     Question convertToModel();
     
     int getMark();

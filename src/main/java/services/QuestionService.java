@@ -40,7 +40,6 @@ public class QuestionService {
 		questionUI.resetTextArea();
 		questionUI.convertToUI(question);
 		MainService.getInstance().setQuestionPanel(questionUI.getPanel());
-		questionUI.moveFocus();
 	}
 
 	public void deleteQuestion(Question question) {

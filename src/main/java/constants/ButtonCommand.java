@@ -6,9 +6,9 @@ public class ButtonCommand {
 	public final static String[] newQuestion = { "newChoose", "newTrueOrFalse", "newComplete", "newConnect", "newMathProblem", "newModelProblem", "newBack" };
 	public final static String[] exam = { "examOpenQuestion", "examDeleteQuestion", "examDone", "examBack", "oldExamAdd" };
 	public static final String[] choose = { "chooseBack", "chooseDone", "next", "exit" };
-	public static final String[] trueOrFalse = { "trueOrFalseDone", "trueOrFalseBack" };
-	public static final String[] complete = { "completeDone", "completeBack" };
-	public static final String[] connect = { "connectDone", "connectBack" };
-	public static final String[] mathProblem = { "mathProblemDone", "mathProblemBack" };
-	public static final String[] model = { "modelProblemDone", "modelProblemBack" };
+	public static final String[] trueOrFalse = { "trueOrFalseBack", "trueOrFalseDone", "next", "exit" };
+	public static final String[] complete = { "completeBack", "completeDone", "next", "exit" };
+	public static final String[] connect = { "connectBack", "connectDone", "next", "exit" };
+	public static final String[] mathProblem = { "mathProblemBack", "mathProblemDone", "next", "exit" };
+	public static final String[] model = { "modelProblemBack", "modelProblemDone", "next", "exit" };
 }

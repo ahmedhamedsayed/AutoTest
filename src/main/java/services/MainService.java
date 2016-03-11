@@ -45,7 +45,7 @@ public class MainService extends JFrame {
 		DatabaseEngine.getInstance().configureDatabase("persistence.xml", Message.MAIN_DATABASE_PATH.getValue());
 		DatabaseEngine.getInstance().configureDatabase("studentPersistence.xml", Message.STUDENT_DATABASE_PATH.getValue());
 	}
-	
+
 	public MainState getCurrentState() {
 		return mainStates.get(mainStates.size() - 1);
 	}
@@ -93,15 +93,15 @@ public class MainService extends JFrame {
 		panels[4] = panel;
 		this.add(panels[4]);
 	}
-	
+
 	public void loginAdmin() {
 		LoginService.getInstance().loginAdmin();
 	}
-	
+
 	public void loginTeacher() {
 		LoginService.getInstance().loginTeacher();
 	}
-	
+
 	public void loginUser() {
 		LoginService.getInstance().loginUser();
 	}
@@ -200,17 +200,24 @@ public class MainService extends JFrame {
 
 	public void chooseDone() {
 		ChooseService.getInstance().chooseDone();
-		ChooseService.getInstance().chooseBack();
 	}
 
 	public void chooseBack() {
 		ChooseService.getInstance().chooseBack();
 	}
-	
+
+	public void trueOrFalseDone() {
+		TrueOrFalseService.getInstance().trueOrFalseDone();
+	}
+
+	public void trueOrFalseBack() {
+		TrueOrFalseService.getInstance().trueOrFalseBack();
+	}
+
 	public void next() {
 		ExamExecuteService.getInstance().moveNext();
 	}
-	
+
 	public void exit() {
 		ExamExecuteService.getInstance().exit();
 	}

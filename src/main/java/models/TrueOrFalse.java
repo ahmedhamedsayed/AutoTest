@@ -5,6 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import repositories.QuestionRepository;
+import repositories.TrueOrFalseRepository;
+import ui.QuestionUI;
+import ui.TrueOrFalseUI;
+
 @Entity
 @Table(name = "trueorfalse")
 @PrimaryKeyJoinColumn(name = "question_id")
@@ -41,6 +46,14 @@ public class TrueOrFalse extends Question {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public QuestionUI getQuestionUI() {
+		return TrueOrFalseUI.getInstance();
+	}
+
+	public QuestionRepository getQuestionRepository() {
+		return TrueOrFalseRepository.getInstance();
 	}
 
     @Override

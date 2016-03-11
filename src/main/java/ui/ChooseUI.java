@@ -1,7 +1,5 @@
 package ui;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -18,7 +16,6 @@ import constants.ButtonCommand;
 import constants.Message;
 import constants.dimentions.ChooseDimension;
 import constants.paths.ChooseLabelPath;
-import services.ChooseService;
 import services.ExamExecuteService;
 import services.QuestionService;
 import util.Dimension;
@@ -38,11 +35,10 @@ public class ChooseUI implements QuestionUI {
 	private JButton[] button;
 	private TimerCountDown timerCountDown;
 	private Choose choose;
-	private int currentTextArea, correctChoise;
+	private int correctChoise;
 	private final int textAreaCounter = 9, buttonsCounter = 4;
 
 	private void buildPanel() {
-		currentTextArea = 0;
 		int screenWidth = Format.screenWidth();
 		int screenHeight = Format.screenHeight();
 		Dimension dim = new Dimension(0, 0, screenWidth, screenHeight);
@@ -76,44 +72,8 @@ public class ChooseUI implements QuestionUI {
 		panel.add(Picture.image(dim, Message.QUESTION_BACK_GROUND_PATH.getValue()));
 	}
 
-	@SuppressWarnings("unused")
-	private void buildAction() {
-		KeyListener saveAction = new KeyListener() {
-
-			public void keyTyped(KeyEvent e) {
-			}
-
-			public void keyReleased(KeyEvent e) {
-			}
-
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-					++currentTextArea;
-					if (currentTextArea == textAreaCounter)
-						currentTextArea = 0;
-					moveFocus();
-				} else if (e.getKeyCode() == KeyEvent.VK_UP) {
-					--currentTextArea;
-					if (currentTextArea == -1)
-						currentTextArea = textAreaCounter - 1;
-					moveFocus();
-				} else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-					ChooseService.getInstance().chooseBack();
-				} else if ((e.getModifiers() & KeyEvent.CTRL_MASK) != 0 && e.getKeyCode() == KeyEvent.VK_S) {
-					ChooseService.getInstance().chooseDone();
-					moveFocus();
-				}
-			}
-		};
-
-		for (int i = 0; i < textAreaCounter; ++i) {
-			chooseTextArea[i].addKeyListener(saveAction);
-		}
-	}
-
 	public ChooseUI() {
 		buildPanel();
-		//buildAction();
 	}
 
 	public static synchronized QuestionUI getInstance() {
@@ -145,8 +105,9 @@ public class ChooseUI implements QuestionUI {
 			indexes.add(i);
 
 		Random random = new Random();
+		boolean isStudent = QuestionService.getInstance().isStudent();
 		for (int i = 0; i < choose.getChoices().size(); ++i) {
-			int index = random.nextInt(indexes.size());
+			int index = (isStudent) ? random.nextInt(indexes.size()) : 0;
 			if (indexes.get(index) + 1 == choose.getAnswer())
 				correctChoise = i + 1;
 			chooseTextArea[i + 3].setText(choose.getChoices().get(indexes.get(index)).getDescription());
@@ -155,7 +116,6 @@ public class ChooseUI implements QuestionUI {
 	}
 
 	private JPanel getPanelForAdminEdit() {
-    	this.currentTextArea = 0;
 		for (int i = 0; i < this.textAreaCounter; ++i)
 			this.chooseTextArea[i].setEditable(true);
 		for (int i = 0; i < this.buttonsCounter; ++i)
@@ -165,7 +125,6 @@ public class ChooseUI implements QuestionUI {
     }
     
     private JPanel getPanelForAdminShow() {
-    	this.currentTextArea = -1;
 		for (int i = 0; i < this.textAreaCounter; ++i)
 			this.chooseTextArea[i].setEditable(false);
 		for (int i = 0; i < this.buttonsCounter; ++i)
@@ -175,7 +134,6 @@ public class ChooseUI implements QuestionUI {
     }
     
     private JPanel getPanelForStudent(boolean inEnd) {
-    	this.currentTextArea = 2;
 		for (int i = 0; i < this.textAreaCounter; ++i)
 			this.chooseTextArea[i].setEditable(i == 2);
 		this.chooseTextArea[2].setText("");
@@ -193,12 +151,6 @@ public class ChooseUI implements QuestionUI {
 		if (QuestionService.getInstance().isStudent())
 			return getPanelForStudent(ExamExecuteService.getInstance().isInEnd());
 		return null;
-	}
-
-	public void moveFocus() {
-		//chooseTextArea[currentTextArea].requestFocusInWindow();
-		//chooseTextArea[currentTextArea].setCaretPosition(chooseTextArea[currentTextArea].getText().length());
-		//chooseTextArea[currentTextArea].getCaret().setVisible(true);
 	}
 
 	public Question convertToModel() {

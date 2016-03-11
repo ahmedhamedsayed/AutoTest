@@ -22,13 +22,12 @@ public class SelectQuestionService {
 		MainService.getInstance().nextState(MainState.AdminNewQuestion);
 		ChooseUI.getInstance().resetTextArea();
 		MainService.getInstance().setQuestionPanel(ChooseUI.getInstance().getPanel());
-		ChooseUI.getInstance().moveFocus();
 	}
 
 	public void newTrueOrFalse() {
 		MainService.getInstance().nextState(MainState.AdminNewQuestion);
-		//MainService.getInstance().setQuestionPanel(TrueOrFalseUI.getInstance());
 		TrueOrFalseUI.getInstance().resetTextArea();
+		MainService.getInstance().setQuestionPanel(TrueOrFalseUI.getInstance().getPanel());
 	}
 
 	public void newComplete() {

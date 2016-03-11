@@ -79,7 +79,7 @@ public class ExamRepository {
 	public Exam update(Exam exam) {
 		try {
 			Exam examExist = findOneByName(exam.getName());
-			if (examExist != null) {
+			if (examExist != null && exam.getId() != examExist.getId()) {
 				Error.reportErrorMessage(Message.EXAM_NAME_ALLREADY_EXIST_ERROR.getValue());
 				return null;
 			}
