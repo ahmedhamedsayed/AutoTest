@@ -28,6 +28,10 @@ public class TrueOrFalse extends Question {
 		return mark;
 	}
 
+	public Integer getTotalQuestionMark() {
+		return mark;
+	}
+
 	public void setMark(int mark) {
 		this.mark = mark;
 	}

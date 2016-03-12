@@ -144,6 +144,6 @@ public class TrueOrFalseUI implements QuestionUI {
 
 	public int getMark() {
 		String studentAnswer = trueOrFalseTextArea[2].getText().trim();
-		return (studentAnswer == trueOrFalse.getAnswer()) ? trueOrFalse.getMark() : 0;
+		return (studentAnswer.equals(trueOrFalse.getAnswer())) ? trueOrFalse.getMark() : 0;
 	}
 }

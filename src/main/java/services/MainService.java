@@ -90,8 +90,10 @@ public class MainService extends JFrame {
 	}
 
 	public void setQuestionPanel(JPanel panel) {
+		this.remove(panels[4]);
 		panels[4] = panel;
 		this.add(panels[4]);
+		this.repaint();
 	}
 
 	public void loginAdmin() {

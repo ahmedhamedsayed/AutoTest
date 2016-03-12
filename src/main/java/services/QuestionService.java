@@ -3,7 +3,6 @@ package services;
 import models.Question;
 import constants.MainState;
 import ui.QuestionUI;
-import util.shape.Success;
 import util.shape.TimerCountDown;
 
 public class QuestionService {
@@ -44,6 +43,5 @@ public class QuestionService {
 
 	public void deleteQuestion(Question question) {
 		question.getQuestionRepository().delete(question);
-		Success.reportSuccessMessage("");
 	}
 }
