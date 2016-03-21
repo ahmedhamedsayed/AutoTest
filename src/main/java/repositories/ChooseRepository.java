@@ -31,7 +31,7 @@ public class ChooseRepository implements QuestionRepository {
 			session.close();
 			return chooses;
 		} catch (Exception e) {
-			Error.reportErrorMessageWithException(e, Message.FIND_ALL_CHOOSES_ERROR.getValue());
+			Error.reportErrorMessageWithException(e, Message.FIND_ALL_QUESTION_ERROR.getValue());
 		}
 		return null;
 	}
@@ -43,7 +43,7 @@ public class ChooseRepository implements QuestionRepository {
 			session.close();
 			return choose;
 		} catch (Exception e) {
-			Error.reportErrorMessageWithException(e, Message.FIND_CHOOSE_BY_ID_ERROR.getValue());
+			Error.reportErrorMessageWithException(e, Message.FIND_QUESTION_BY_ID_ERROR.getValue());
 		}
 		return null;
 	}
@@ -64,7 +64,7 @@ public class ChooseRepository implements QuestionRepository {
 			choose.setChoices(choices);
 			return choose;
 		} catch (Exception e) {
-			Error.reportErrorMessageWithException(e, Message.SAVE_CHOOSE_ERROR.getValue());
+			Error.reportErrorMessageWithException(e, Message.SAVE_QUESTION_ERROR.getValue());
 		}
 		return null;
 	}
@@ -84,7 +84,7 @@ public class ChooseRepository implements QuestionRepository {
 			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
-			Error.reportErrorMessageWithException(e, Message.DELETE_CHOOSE_ERROR.getValue());
+			Error.reportErrorMessageWithException(e, Message.DELETE_QUESTION_ERROR.getValue());
 		}
 	}
 }

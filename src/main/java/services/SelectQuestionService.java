@@ -32,8 +32,8 @@ public class SelectQuestionService {
 
 	public void newComplete() {
 		MainService.getInstance().nextState(MainState.AdminNewQuestion);
-		//MainService.getInstance().setQuestionPanel(CompleteUI.getInstance());
-		CompleteUI.getInstance().resetTextArea();
+		TrueOrFalseUI.getInstance().resetTextArea();
+		MainService.getInstance().setQuestionPanel(CompleteUI.getInstance().getPanel());
 	}
 
 	public void newConnect() {

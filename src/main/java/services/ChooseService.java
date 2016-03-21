@@ -9,7 +9,7 @@ public class ChooseService {
 
 	private static ChooseService chooseService;
 
-	public static ChooseService getInstance() {
+	public static synchronized ChooseService getInstance() {
 		if (chooseService == null)
 			return chooseService = new ChooseService();
 		return chooseService;

@@ -208,6 +208,14 @@ public class MainService extends JFrame {
 		ChooseService.getInstance().chooseBack();
 	}
 
+	public void completeDone() {
+		CompleteService.getInstance().completeDone();
+	}
+
+	public void completeBack() {
+		CompleteService.getInstance().completeBack();
+	}
+
 	public void trueOrFalseDone() {
 		TrueOrFalseService.getInstance().trueOrFalseDone();
 	}

@@ -39,7 +39,7 @@ public class TeacherService {
 		File folder = new File(path);
 		File[] databases = folder.listFiles();
 		for (int i = 0; i < databases.length; i++) {
-			if (!databases[i].isFile())
+			if (!databases[i].isFile() || databases[i].getName().equals("auto_test.db"))
 				continue;
 			String databasePath = path + "\\" + databases[i].getName();
 			DatabaseEngine.getInstance().configureDatabase("studentPersistence.xml", databasePath);
@@ -98,16 +98,16 @@ public class TeacherService {
 	}
 	
 	private void buildPDFHeader(PdfPTable table, Integer examMark) {
-		String idCellText = Message.FINAL_SHEET_HEADER_ID_COLUMN.getValue();
-		PdfPCell headerIdCell = PDFCell.pdfCell(11, true, idCellText, 20f);
-		table.addCell(headerIdCell);
+		String examNameCellText = Message.FINAL_SHEET_HEADER_EXAM_NAME.getValue();
+		PdfPCell headerExamNameCell = PDFCell.pdfCell(11, true, examNameCellText, 20f);
+		table.addCell(headerExamNameCell);
 
 		String markCellText = Message.FINAL_SHEET_HEADER_MARK.getValue() + "[" + String.valueOf(examMark) + "]";
 		PdfPCell headerMarkCell = PDFCell.pdfCell(11, true, markCellText, 20f);
 		table.addCell(headerMarkCell);
 
-		String examNameCellText = Message.FINAL_SHEET_HEADER_EXAM_NAME.getValue();
-		PdfPCell headerExamNameCell = PDFCell.pdfCell(11, true, examNameCellText, 20f);
-		table.addCell(headerExamNameCell);
+		String idCellText = Message.FINAL_SHEET_HEADER_ID_COLUMN.getValue();
+		PdfPCell headerIdCell = PDFCell.pdfCell(11, true, idCellText, 20f);
+		table.addCell(headerIdCell);
 	}
 }

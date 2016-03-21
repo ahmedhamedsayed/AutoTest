@@ -5,6 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import repositories.CompleteRepository;
+import repositories.QuestionRepository;
+import ui.CompleteUI;
+import ui.QuestionUI;
+
 @Entity
 @Table(name = "complete")
 @PrimaryKeyJoinColumn(name = "question_id")
@@ -16,13 +21,14 @@ public class Complete extends Question {
     @Column(name = "answer")
     private String answer;
 
-    @Column(name = "description")
-    private String description;
-
 	public int getMark() {
 		return mark;
 	}
 
+	public Integer getTotalQuestionMark() {
+		return mark;
+	}
+	
 	public void setMark(int mark) {
 		this.mark = mark;
 	}
@@ -35,15 +41,15 @@ public class Complete extends Question {
 		this.answer = answer;
 	}
 
-	public String getDescription() {
-		return description;
+	public QuestionUI getQuestionUI() {
+		return CompleteUI.getInstance();
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public QuestionRepository getQuestionRepository() {
+		return CompleteRepository.getInstance();
 	}
 
-    @Override
+	@Override
     public String toString() {
         return "ID = " + String.valueOf(getId()) + "\nMark = " + String.valueOf(getMark()) + "\nAnswer = " + getAnswer() + "\nDescription = " + getDescription() + "\n";
     }

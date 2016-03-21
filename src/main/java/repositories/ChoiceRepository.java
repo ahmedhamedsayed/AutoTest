@@ -27,7 +27,7 @@ public class ChoiceRepository {
 			session.close();
 			return choice;
 		} catch (Exception e) {
-			Error.reportErrorMessageWithException(e, Message.SAVE_CHOICE_ERROR.getValue());
+			Error.reportErrorMessageWithException(e, Message.SAVE_QUESTION_ERROR.getValue());
 		}
 		return null;
 	}
@@ -40,7 +40,7 @@ public class ChoiceRepository {
 			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
-			Error.reportErrorMessageWithException(e, Message.DELETE_CHOICE_ERROR.getValue());
+			Error.reportErrorMessageWithException(e, Message.DELETE_QUESTION_ERROR.getValue());
 		}
 	}
 }

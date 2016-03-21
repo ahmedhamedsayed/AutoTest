@@ -5,7 +5,7 @@ import util.Dimension;
 public class CompleteDimension {
     public static Dimension[] labelDimension = new Dimension[3];
     public static Dimension[] textAreaDimension = new Dimension[3];
-    public static Dimension[] buttonDimension = new Dimension[2];
+    public static Dimension[] buttonDimension = new Dimension[4];
 
     public CompleteDimension(int w, int h) {
         setLabelDimension(w / 2, h / 5);
@@ -26,7 +26,9 @@ public class CompleteDimension {
     }
 
     private void setButtonDimension(int w, int h) {
-        buttonDimension[0] = new Dimension(-242 + w, 400 + h, 100, 30);
-        buttonDimension[1] = new Dimension(141 + w, 400 + h, 100, 30);
+        buttonDimension[0] = new Dimension(141 + w, 400 + h, 100, 30);
+        buttonDimension[1] = new Dimension(-242 + w, 400 + h, 100, 30);
+        buttonDimension[2] = new Dimension(141 + w, 400 + h, 100, 30);
+        buttonDimension[3] = new Dimension(-242 + w, 400 + h, 100, 30);
     }
 }
