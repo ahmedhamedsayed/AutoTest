@@ -48,9 +48,4 @@ public class Choice {
 	public void setChoose(Choose choose) {
 		this.choose = choose;
 	}
-
-    @Override
-    public String toString() {
-        return "ID = " + String.valueOf(getId()) + "\nChoose ID = " + ((choose != null) ? String.valueOf(choose.getId()) : "Null") + "\nDescription = " + String.valueOf(getDescription()) + "\n";
-    }
 }

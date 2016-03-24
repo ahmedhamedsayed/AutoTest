@@ -4,92 +4,88 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.ModelProblem;
-import models.ModelProblemAnswer;
-import models.ModelProblemDescription;
+import models.ModelProblemEntry;
+import models.Question;
 
 import org.hibernate.Session;
 
+import util.shape.Error;
 import configuration.databaseConfiguration.DatabaseEngine;
+import constants.Message;
 
-public class ModelProblemRepository {
+public class ModelProblemRepository implements QuestionRepository {
 
-    private static ModelProblemRepository modelProblemRepository;
+	private static ModelProblemRepository modelProblemRepository;
 
-    public static synchronized ModelProblemRepository getInstance() {
-        if (modelProblemRepository == null)
-            return modelProblemRepository = new ModelProblemRepository();
-        return modelProblemRepository;
-    }
+	public static synchronized ModelProblemRepository getInstance() {
+		if (modelProblemRepository == null)
+			return modelProblemRepository = new ModelProblemRepository();
+		return modelProblemRepository;
+	}
 
-    public List<ModelProblem> findAll() {
-        Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
-        @SuppressWarnings("unchecked")
-		List<ModelProblem> list = session.createQuery("FROM ModelProblem").list();
-        session.close();
-        return list;
-    }
+	public List<Question> findAll() {
+		try {
+			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
+			@SuppressWarnings("unchecked")
+			List<Question> modelProblems = session.createQuery("FROM ModelProblem").list();
+			session.close();
+			return modelProblems;
+		} catch (Exception e) {
+			Error.reportErrorMessageWithException(e, Message.FIND_ALL_QUESTION_ERROR.getValue());
+		}
+		return null;
+	}
 
-    public ModelProblem findOneById(int id) {
-        Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
-        @SuppressWarnings("unchecked")
-		List<ModelProblem> list = session.createQuery("FROM ModelProblem modelProblem WHERE modelProblem.id = :id").setParameter("id", id).list();
-        session.close();
-        return (list.size() == 0) ? null : list.get(0);
-    }
+	public Question findOneById(int id) {
+		try {
+			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
+			ModelProblem modelProblem = (ModelProblem) session.createQuery("FROM ModelProblem modelProblem WHERE modelProblem.id = :id").setParameter("id", id).uniqueResult();
+			session.close();
+			return modelProblem;
+		} catch (Exception e) {
+			Error.reportErrorMessageWithException(e, Message.FIND_QUESTION_BY_ID_ERROR.getValue());
+		}
+		return null;
+	}
 
-    public ModelProblem findOneByDescription(String description) {
-        Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
-        @SuppressWarnings("unchecked")
-		List<ModelProblem> list = session.createQuery("FROM ModelProblem modelProblem WHERE modelProblem.description = :description").setParameter("description", description).list();
-        session.close();
-        return (list.size() == 0) ? null : list.get(0);
-    }
+	public Question save(Question question) {
+		try {
+			ModelProblem modelProblem = (ModelProblem) question;
+			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
+			session.beginTransaction();
+			modelProblem.setId((Integer) session.save(modelProblem));
+			session.getTransaction().commit();
+			session.close();
+			List<ModelProblemEntry> modelProblemEntries = new ArrayList<ModelProblemEntry>();
+			for (ModelProblemEntry modelProblemEntry : modelProblem.getModelProblemEntries()) {
+				modelProblemEntry.setModelProblem(modelProblem);
+				modelProblemEntries.add(ModelProblemEntryRepository.getInstance().save(modelProblemEntry));
+			}
+			modelProblem.setModelProblemEntries(modelProblemEntries);
+			return modelProblem;
+		} catch (Exception e) {
+			Error.reportErrorMessageWithException(e, Message.SAVE_QUESTION_ERROR.getValue());
+		}
+		return null;
+	}
 
-    public ModelProblem save(ModelProblem modelProblem) {
-        ModelProblem modelProblemExist = findOneByDescription(modelProblem.getDescription());
-        if (modelProblemExist != null)
-            return modelProblemExist;
-        Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
-        session.beginTransaction();
-        modelProblem.setId((Integer) session.save(modelProblem));
-        session.getTransaction().commit();
-        session.close();
-        List<ModelProblemDescription> modelProblemDescriptions = new ArrayList<ModelProblemDescription>();
-        for (ModelProblemDescription modelProblemDescription : modelProblem.getModelProblemDescriptions()) {
-            modelProblemDescription.setModelProblem(modelProblem);
-            modelProblemDescriptions.add(ModelProblemDescriptionRepository.getInstance().save(modelProblemDescription));
-        }
-        modelProblem.setModelProblemDescriptions(modelProblemDescriptions);
-        List<ModelProblemAnswer> modelProblemAnswers = new ArrayList<ModelProblemAnswer>();
-        for (ModelProblemAnswer modelProblemAnswer : modelProblem.getModelProblemAnswers()) {
-            modelProblemAnswer.setModelProblem(modelProblem);
-            modelProblemAnswers.add(ModelProblemAnswerRepository.getInstance().save(modelProblemAnswer));
-        }
-        modelProblem.setModelProblemAnswers(modelProblemAnswers);
-        return modelProblem;
-    }
+	public void update(Question question) {
+		delete(question);
+		save(question);
+	}
 
-    public void update(ModelProblem modelProblem) {
-        for (ModelProblemDescription modelProblemDescription : modelProblem.getModelProblemDescriptions())
-            ModelProblemDescriptionRepository.getInstance().update(modelProblemDescription);
-        for (ModelProblemAnswer modelProblemAnswer : modelProblem.getModelProblemAnswers())
-            ModelProblemAnswerRepository.getInstance().update(modelProblemAnswer);
-        Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
-        session.beginTransaction();
-        session.update(modelProblem);
-        session.getTransaction().commit();
-        session.close();
-    }
-
-    public void delete(ModelProblem modelProblem) {
-        for (ModelProblemDescription modelProblemDescription : modelProblem.getModelProblemDescriptions())
-            ModelProblemDescriptionRepository.getInstance().delete(modelProblemDescription);
-        for (ModelProblemAnswer modelProblemAnswer : modelProblem.getModelProblemAnswers())
-            ModelProblemAnswerRepository.getInstance().delete(modelProblemAnswer);
-        Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
-        session.beginTransaction();
-        session.delete(modelProblem);
-        session.getTransaction().commit();
-        session.close();
-    }
+	public void delete(Question question) {
+		try {
+			ModelProblem modelProblem = (ModelProblem) question;
+			for (ModelProblemEntry modelProblemEntry : modelProblem.getModelProblemEntries())
+				ModelProblemEntryRepository.getInstance().delete(modelProblemEntry);
+			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
+			session.beginTransaction();
+			session.delete(modelProblem);
+			session.getTransaction().commit();
+			session.close();
+		} catch (Exception e) {
+			Error.reportErrorMessageWithException(e, Message.DELETE_QUESTION_ERROR.getValue());
+		}
+	}
 }

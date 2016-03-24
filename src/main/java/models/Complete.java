@@ -48,9 +48,4 @@ public class Complete extends Question {
 	public QuestionRepository getQuestionRepository() {
 		return CompleteRepository.getInstance();
 	}
-
-	@Override
-    public String toString() {
-        return "ID = " + String.valueOf(getId()) + "\nMark = " + String.valueOf(getMark()) + "\nAnswer = " + getAnswer() + "\nDescription = " + getDescription() + "\n";
-    }
 }

@@ -9,6 +9,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import repositories.ModelProblemRepository;
+import repositories.QuestionRepository;
+import ui.ModelProblemUI;
+import ui.QuestionUI;
+
 @Entity
 @Table(name = "modelproblem")
 @PrimaryKeyJoinColumn(name = "question_id")
@@ -17,44 +22,34 @@ public class ModelProblem extends Question {
 	@Column(name = "mark")
 	private int mark;
 
-	@Column(name = "description")
-	private String description;
-
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "modelProblem")
-	private List<ModelProblemDescription> modelProblemDescriptions;
-
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "modelProblem")
-	private List<ModelProblemAnswer> modelProblemAnswers;
+	private List<ModelProblemEntry> modelProblemEntries;
 
 	public int getMark() {
 		return mark;
+	}
+
+	public Integer getTotalQuestionMark() {
+		return modelProblemEntries.size() * mark;
 	}
 
 	public void setMark(int mark) {
 		this.mark = mark;
 	}
 
-	public String getDescription() {
-		return description;
+	public List<ModelProblemEntry> getModelProblemEntries() {
+		return modelProblemEntries;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setModelProblemEntries(List<ModelProblemEntry> modelProblemEntries) {
+		this.modelProblemEntries = modelProblemEntries;
 	}
 
-	public List<ModelProblemDescription> getModelProblemDescriptions() {
-		return modelProblemDescriptions;
+	public QuestionUI getQuestionUI() {
+		return ModelProblemUI.getInstance();
 	}
 
-	public void setModelProblemDescriptions(List<ModelProblemDescription> modelProblemDescriptions) {
-		this.modelProblemDescriptions = modelProblemDescriptions;
-	}
-
-	public List<ModelProblemAnswer> getModelProblemAnswers() {
-		return modelProblemAnswers;
-	}
-
-	public void setModelProblemAnswers(List<ModelProblemAnswer> modelProblemAnswers) {
-		this.modelProblemAnswers = modelProblemAnswers;
+	public QuestionRepository getQuestionRepository() {
+		return ModelProblemRepository.getInstance();
 	}
 }

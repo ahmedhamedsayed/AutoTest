@@ -22,7 +22,7 @@
         <mapping class="models.Law"/>
         <mapping class="models.LawAnswer"/>
         <mapping class="models.ModelProblem"/>
-        <mapping class="models.ModelProblemDescription"/>
+        <mapping class="models.ModelProblemEntry"/>
         <mapping class="models.ModelProblemAnswer"/>
         <mapping class="models.TrueOrFalse"/>
     </session-factory>

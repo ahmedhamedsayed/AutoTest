@@ -59,9 +59,4 @@ public class ExamPercentage {
 	public void setExam(Exam exam) {
 		this.exam = exam;
 	}
-
-	@Override
-	public String toString() {
-		return "ID = " + String.valueOf(getId());
-	}
 }

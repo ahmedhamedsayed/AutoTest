@@ -21,10 +21,10 @@ public class ChooseDimension {
     }
 
     private void setTextAreaDimension(int w, int h) {
-        textAreaDimension[0] = new Dimension(-242 + w, 30 + h, 484, 200); // Question.
-        textAreaDimension[1] = new Dimension(123 + w, 232 + h, 55, 30);   // Mark.
-        textAreaDimension[2] = new Dimension(-242 + w, 232 + h, 55, 30);  // Answer.
-        textAreaDimension[3] = new Dimension(-242 + w, 264 + h, 484, 20); // Choices.
+        textAreaDimension[0] = new Dimension(-242 + w, 30 + h, 484, 200);
+        textAreaDimension[1] = new Dimension(123 + w, 232 + h, 55, 30);
+        textAreaDimension[2] = new Dimension(-242 + w, 232 + h, 55, 30);
+        textAreaDimension[3] = new Dimension(-242 + w, 264 + h, 484, 20);
         textAreaDimension[4] = new Dimension(-242 + w, 285 + h, 484, 20);
         textAreaDimension[5] = new Dimension(-242 + w, 306 + h, 484, 20);
         textAreaDimension[6] = new Dimension(-242 + w, 327 + h, 484, 20);

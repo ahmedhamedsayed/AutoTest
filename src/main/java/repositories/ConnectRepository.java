@@ -5,95 +5,88 @@ import java.util.List;
 
 import models.Connect;
 import models.ConnectPair;
+import models.Question;
 
 import org.hibernate.Session;
 
+import util.shape.Error;
 import configuration.databaseConfiguration.DatabaseEngine;
+import constants.Message;
 
-/**
- * Created by Ahmed Hamed on 8/23/2015.
- */
-public class ConnectRepository {
+public class ConnectRepository implements QuestionRepository {
 
-    private static ConnectRepository connectRepository;
+	private static ConnectRepository connectRepository;
 
-    public static synchronized ConnectRepository getInstance() {
-        if (connectRepository == null)
-            return connectRepository = new ConnectRepository();
-        return connectRepository;
-    }
+	public static synchronized ConnectRepository getInstance() {
+		if (connectRepository == null)
+			return connectRepository = new ConnectRepository();
+		return connectRepository;
+	}
 
-    public List<Connect> findAll() {
-        Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
-        @SuppressWarnings("unchecked")
-		List<Connect> list = session.createQuery("FROM Connect").list();
-        session.close();
-        return list;
-    }
+	public List<Question> findAll() {
+		try {
+			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
+			@SuppressWarnings("unchecked")
+			List<Question> connects = session.createQuery("FROM Connect").list();
+			session.close();
+			return connects;
+		} catch (Exception e) {
+			Error.reportErrorMessageWithException(e, Message.FIND_ALL_QUESTION_ERROR.getValue());
+		}
+		return null;
+	}
 
-    public Connect findOneById(int id) {
-        Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
-        @SuppressWarnings("unchecked")
-		List<Connect> list = session.createQuery("FROM Connect connect WHERE connect.id = :id").setParameter("id", id).list();
-        session.close();
-        return (list.size() == 0) ? null : list.get(0);
-    }
+	public Question findOneById(int id) {
+		try {
+			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
+			Connect connect = (Connect) session.createQuery("FROM Connect connect WHERE connect.id = :id").setParameter("id", id).uniqueResult();
+			session.close();
+			return connect;
+		} catch (Exception e) {
+			Error.reportErrorMessageWithException(e, Message.FIND_QUESTION_BY_ID_ERROR.getValue());
+		}
+		return null;
+	}
 
-    public Connect findOneByDescription(List<ConnectPair> connectPairs) {
-        List<Connect> connects = findAll();
-        for (Connect connect : connects) {
-            boolean found = true;
-            for (ConnectPair connectPair : connectPairs) {
-                boolean flag = false;
-                for (ConnectPair connectPairCur : connect.getConnectPairs())
-                    if (connectPairCur.getDescription().equals(connectPair.getDescription()) && connectPairCur.getAnswer().equals(connectPair.getAnswer())) {
-                        flag = true;
-                        break;
-                    }
-                found &= flag;
-            }
-            if (found)
-                return connect;
-        }
-        return null;
-    }
+	public Question save(Question question) {
+		try {
+			Connect connect = (Connect) question;
+			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
+			session.beginTransaction();
+			connect.setId((Integer) session.save(connect));
+			session.getTransaction().commit();
+			session.close();
+			List<ConnectPair> connectPairs = new ArrayList<ConnectPair>();
+			for (ConnectPair connectPair : connect.getConnectPairs()) {
+				connectPair.setConnect(connect);
+				connectPairs.add(ConnectPairRepository.getInstance().save(connectPair));
+			}
+			connect.setConnectPairs(connectPairs);
+			return connect;
+		} catch (Exception e) {
+			Error.reportErrorMessageWithException(e, Message.SAVE_QUESTION_ERROR.getValue());
+		}
+		return null;
+	}
 
-    public Connect save(Connect connect) {
-        Connect connectExist = findOneByDescription(connect.getConnectPairs());
-        if (connectExist != null)
-            return connectExist;
-        Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
-        session.beginTransaction();
-        connect.setId((Integer) session.save(connect));
-        session.getTransaction().commit();
-        session.close();
-        List<ConnectPair> connectPairs = new ArrayList<ConnectPair>();
-        for (ConnectPair connectPair : connect.getConnectPairs()) {
-            connectPair.setConnect(connect);
-            connectPairs.add(ConnectPairRepository.getInstance().save(connectPair));
-        }
-        connect.setConnectPairs(connectPairs);
-        return connect;
-    }
+	public void update(Question question) {
+		delete(question);
+		save(question);
+	}
 
-    public void update(Connect connect) {
-        for (ConnectPair connectPair : connect.getConnectPairs())
-            ConnectPairRepository.getInstance().update(connectPair);
-        Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
-        session.beginTransaction();
-        session.update(connect);
-        session.getTransaction().commit();
-        session.close();
-    }
-
-    public void delete(Connect connect) {
-        for (ConnectPair connectPair : connect.getConnectPairs())
-            ConnectPairRepository.getInstance().delete(connectPair);
-        Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
-        session.beginTransaction();
-        session.delete(connect);
-        session.getTransaction().commit();
-        session.close();
-    }
+	public void delete(Question question) {
+		try {
+			Connect connect = (Connect) question;
+			for (ConnectPair connectPair : connect.getConnectPairs())
+				ConnectPairRepository.getInstance().delete(connectPair);
+			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
+			session.beginTransaction();
+			session.delete(connect);
+			session.getTransaction().commit();
+			session.close();
+		} catch (Exception e) {
+			Error.reportErrorMessageWithException(e, Message.DELETE_QUESTION_ERROR.getValue());
+		}
+	}
 
 }

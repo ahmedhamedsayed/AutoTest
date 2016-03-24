@@ -127,9 +127,4 @@ public class Exam {
 			percentage -= examPercentage.getPercentage();
 		return percentage;
 	}
-
-	@Override
-	public String toString() {
-		return "ID = " + String.valueOf(getId());
-	}
 }

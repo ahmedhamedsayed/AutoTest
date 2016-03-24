@@ -63,9 +63,4 @@ public class Choose extends Question {
 	public QuestionRepository getQuestionRepository() {
 		return ChooseRepository.getInstance();
 	}
-
-	@Override
-	public String toString() {
-		return "ID = " + String.valueOf(getId()) + "\nMark = " + String.valueOf(getMark()) + "\nAnswer = " + String.valueOf(getAnswer()) + "\nDescription = " + getDescription() + "\n";
-	}
 }

@@ -9,31 +9,37 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import repositories.MathProblemRepository;
+import repositories.QuestionRepository;
+import ui.MathProblemUI;
+import ui.QuestionUI;
+
 @Entity
 @Table(name = "mathproblem")
 @PrimaryKeyJoinColumn(name = "question_id")
 public class MathProblem extends Question {
 
-    @Column(name = "lawmark")
-    private int lawMark;
+	@Column(name = "lawmark")
+	private int lawMark;
 
-    @Column(name = "numbermark")
-    private int numberMark;
+	@Column(name = "numbermark")
+	private int numberMark;
 
-    @Column(name = "answer")
-    private int answer;
+	@Column(name = "answer")
+	private int answer;
 
-    @Column(name = "description")
-    private String description;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "mathProblem")
+	private List<Law> laws;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "mathProblem")
-    private List<Law> laws;
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "mathProblem")
-    private List<LawAnswer> lawAnswers;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "mathProblem")
+	private List<LawAnswer> lawAnswers;
 
 	public int getLawMark() {
 		return lawMark;
+	}
+
+	public Integer getTotalQuestionMark() {
+		return lawMark + lawAnswers.size() * numberMark;
 	}
 
 	public void setLawMark(int lawMark) {
@@ -56,14 +62,6 @@ public class MathProblem extends Question {
 		this.answer = answer;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public List<Law> getLaws() {
 		return laws;
 	}
@@ -80,8 +78,11 @@ public class MathProblem extends Question {
 		this.lawAnswers = lawAnswers;
 	}
 
-    @Override
-    public String toString() {
-        return "Law Mark = " + String.valueOf(getLawMark()) + "\nNumber Mark = " + String.valueOf(numberMark) + "\nAnswer = " + getAnswer() + "\nDescription = " + getDescription() + "\n";
-    }
+	public QuestionUI getQuestionUI() {
+		return MathProblemUI.getInstance();
+	}
+
+	public QuestionRepository getQuestionRepository() {
+		return MathProblemRepository.getInstance();
+	}
 }

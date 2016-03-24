@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "modelproblemdescription")
-public class ModelProblemDescription {
+public class ModelProblemEntry {
 
 	@Id
 	@Column(name = "id")
@@ -23,6 +23,9 @@ public class ModelProblemDescription {
 
 	@Column(name = "description")
 	private String description;
+
+	@Column(name = "answer")
+	private String answer;
 
 	@ManyToOne
 	@JoinColumn(name = "question_id")
@@ -50,6 +53,14 @@ public class ModelProblemDescription {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
 	}
 
 	public ModelProblem getModelProblem() {

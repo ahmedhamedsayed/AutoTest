@@ -80,9 +80,4 @@ public class Question {
 	public QuestionRepository getQuestionRepository() {
 		return null;
 	}
-
-	@Override
-	public String toString() {
-		return "ID = " + String.valueOf(getId());
-	}
 }

@@ -48,9 +48,4 @@ public class Law {
 	public void setMathProblem(MathProblem mathProblem) {
 		this.mathProblem = mathProblem;
 	}
-
-	@Override
-	public String toString() {
-		return "ID = " + String.valueOf(getId()) + "\nDescription = " + getDescription() + "\n";
-	}
 }

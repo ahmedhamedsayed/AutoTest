@@ -59,9 +59,4 @@ public class TrueOrFalse extends Question {
 	public QuestionRepository getQuestionRepository() {
 		return TrueOrFalseRepository.getInstance();
 	}
-
-    @Override
-    public String toString() {
-        return "ID = " + String.valueOf(getId()) + "\nMark = " + String.valueOf(getMark()) + "\nAnswer = " + getAnswer() + "\nDescription = " + getDescription() + "\n";
-    }
 }

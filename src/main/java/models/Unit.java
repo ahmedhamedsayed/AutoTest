@@ -60,10 +60,4 @@ public class Unit {
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
-
-	@Override
-	public String toString() {
-		return "ID = " + String.valueOf(getId()) + "\nDescription = "
-				+ getDescription() + "\n";
-	}
 }

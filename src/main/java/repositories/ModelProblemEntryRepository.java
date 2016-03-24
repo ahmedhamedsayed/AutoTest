@@ -1,6 +1,6 @@
 package repositories;
 
-import models.ConnectPair;
+import models.ModelProblemEntry;
 
 import org.hibernate.Session;
 
@@ -8,40 +8,39 @@ import util.shape.Error;
 import configuration.databaseConfiguration.DatabaseEngine;
 import constants.Message;
 
-public class ConnectPairRepository {
+public class ModelProblemEntryRepository {
 
-	private static ConnectPairRepository connectPairRepository;
+	private static ModelProblemEntryRepository modelProblemEntryRepository;
 
-	public static synchronized ConnectPairRepository getInstance() {
-		if (connectPairRepository == null)
-			return connectPairRepository = new ConnectPairRepository();
-		return connectPairRepository;
+	public static synchronized ModelProblemEntryRepository getInstance() {
+		if (modelProblemEntryRepository == null)
+			return modelProblemEntryRepository = new ModelProblemEntryRepository();
+		return modelProblemEntryRepository;
 	}
 
-	public ConnectPair save(ConnectPair connectPair) {
+	public ModelProblemEntry save(ModelProblemEntry modelProblemEntry) {
 		try {
 			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
 			session.beginTransaction();
-			connectPair.setId((Integer) session.save(connectPair));
+			modelProblemEntry.setId((Integer) session.save(modelProblemEntry));
 			session.getTransaction().commit();
 			session.close();
-			return connectPair;
+			return modelProblemEntry;
 		} catch (Exception e) {
 			Error.reportErrorMessageWithException(e, Message.SAVE_QUESTION_ERROR.getValue());
 		}
 		return null;
 	}
 
-	public void delete(ConnectPair connectPair) {
+	public void delete(ModelProblemEntry modelProblemEntry) {
 		try {
 			Session session = DatabaseEngine.getInstance().getMainDatabaseSession();
 			session.beginTransaction();
-			session.delete(connectPair);
+			session.delete(modelProblemEntry);
 			session.getTransaction().commit();
 			session.close();
 		} catch (Exception e) {
 			Error.reportErrorMessageWithException(e, Message.DELETE_QUESTION_ERROR.getValue());
 		}
 	}
-
 }
