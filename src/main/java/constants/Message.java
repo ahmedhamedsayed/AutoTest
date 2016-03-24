@@ -37,6 +37,8 @@ public enum Message {
 	
 	DELETE_QUESTION_CONFIRM("هل تريد مسح السؤال ؟"),
 	
+	INIT_CONNECT("وصل"),
+	
 	FIND_ALL_QUESTION_ERROR("خطأ أثناء احضار اسئلة من قاعدة البيانات"),
 	FIND_QUESTION_BY_ID_ERROR("خطأ أثناء محاولة ايجاد سؤال  من قاعدة البيانات بوسطة رقم السؤال"),
 	FIND_QUESTION_BY_DESCRIPTION_ERROR("خطأ أثناء محاولة ايجاد سؤال من قاعدة البيانات بوسطة وصف السؤال"),

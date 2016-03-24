@@ -58,7 +58,7 @@ public class ConnectUI implements QuestionUI {
 			panel.add(connectTextArea[i]);
 		}
 
-		JButton[] button = new JButton[buttonsCounter];
+		button = new JButton[buttonsCounter];
 		for (int i = 0; i < buttonsCounter; ++i) {
 			Dimension curButtonDimension = ConnectDimension.buttonDimension[i];
 			String curButtonName = ButtonCommand.connect[i];
@@ -95,8 +95,10 @@ public class ConnectUI implements QuestionUI {
 		connect = (Connect) question;
 		for (int i = 0; i < connect.getConnectPairs().size(); ++i) {
 			connectTextArea[i].setText(connect.getConnectPairs().get(i).getFirstDescription());
-			connectTextArea[i + 6].setText(connect.getConnectPairs().get(i).getSecondDescription());
-			connectTextArea[i + 13].setText(String.valueOf(connect.getConnectPairs().get(i).getAnswer()));
+			if (!"".equals(connect.getConnectPairs().get(i).getSecondDescription())) {
+				connectTextArea[i + 6].setText(connect.getConnectPairs().get(i).getSecondDescription());
+				connectTextArea[i + 13].setText(String.valueOf(connect.getConnectPairs().get(i).getAnswer()));
+			}
 		}
 		connectTextArea[12].setText(String.valueOf(connect.getMark()));
 	}
@@ -145,13 +147,25 @@ public class ConnectUI implements QuestionUI {
 		Connect newConnect = new Connect();
 		if (connect != null)
 			newConnect.setId(connect.getId());
+		newConnect.setDescription(Message.INIT_CONNECT.getValue());
 		List<ConnectPair> connectPairs = new ArrayList<ConnectPair>();
 		for (int i = 0; i < 6; ++i) {
 			ConnectPair connectPair = new ConnectPair();
-			connectPair.setFirstDescription(connectTextArea[i].getText().trim());
-			connectPair.setSecondDescription(connectTextArea[i + 6].getText().trim());
-			connectPair.setAnswer(Integer.valueOf(connectTextArea[i + 13].getText().trim()));
-			connectPairs.add(connectPair);
+			String firstDescription = connectTextArea[i].getText().trim();
+			String secondDescription = connectTextArea[i + 6].getText().trim();
+			String answer = connectTextArea[i + 13].getText().trim();
+			boolean newOne = false;
+			if (!"".equals(firstDescription)) {
+				newOne = true;
+				connectPair.setFirstDescription(firstDescription);
+			}
+			if (!"".equals(answer) && !"".equals(secondDescription)) {
+				newOne = true;
+				connectPair.setSecondDescription(secondDescription);
+				connectPair.setAnswer(Integer.valueOf(answer));
+			}
+			if (newOne)
+				connectPairs.add(connectPair);
 		}
 		newConnect.setConnectPairs(connectPairs);
 		newConnect.setMark(Integer.valueOf(connectTextArea[12].getText().trim()));

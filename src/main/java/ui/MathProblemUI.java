@@ -59,7 +59,7 @@ public class MathProblemUI implements QuestionUI {
 			panel.add(mathProblemTextArea[i]);
 		}
 
-		JButton[] button = new JButton[buttonsCounter];
+		button = new JButton[buttonsCounter];
 		for (int i = 0; i < buttonsCounter; ++i) {
 			Dimension curButtonDimension = MathProblemDimension.buttonDimension[i];
 			String curButtonName = ButtonCommand.mathProblem[i];
@@ -100,7 +100,7 @@ public class MathProblemUI implements QuestionUI {
 		for (int i = 0; i < mathProblem.getLaws().size(); ++i)
 			mathProblemTextArea[i + 3].setText(mathProblem.getLaws().get(i).getDescription());
 		for (int i = 0; i < mathProblem.getLawAnswers().size(); ++i)
-			mathProblemTextArea[i + 9].setText(String.valueOf(mathProblem.getLawAnswers().get(i).getDescription()));
+			mathProblemTextArea[14 - i].setText(String.valueOf(mathProblem.getLawAnswers().get(i).getDescription()));
 		mathProblemTextArea[15].setText(String.valueOf(mathProblem.getNumberMark()));
 	}
 
@@ -153,17 +153,24 @@ public class MathProblemUI implements QuestionUI {
 		newMathProblem.setAnswer(Integer.valueOf(mathProblemTextArea[2].getText().trim()));
 		List<Law> laws = new ArrayList<Law>();
 		for (int i = 0; i < 6; ++i) {
-			Law law = new Law();
-			law.setDescription(mathProblemTextArea[i + 3].getText().trim());
-			laws.add(law);
+			String description = mathProblemTextArea[i + 3].getText().trim();
+			if (!"".equals(description)) {
+				Law law = new Law();
+				law.setDescription(description);
+				laws.add(law);
+			}
 		}
 		newMathProblem.setLaws(laws);
 		List<LawAnswer> lawAnswers = new ArrayList<LawAnswer>();
 		for (int i = 0; i < 6; ++i) {
-			LawAnswer lawAnswer = new LawAnswer();
-			lawAnswer.setDescription(Integer.valueOf(mathProblemTextArea[i + 9].getText().trim()));
-			lawAnswers.add(lawAnswer);
+			String description = mathProblemTextArea[14 - i].getText().trim();
+			if (!"".equals(description)) {
+				LawAnswer lawAnswer = new LawAnswer();
+				lawAnswer.setDescription(Integer.valueOf(description));
+				lawAnswers.add(lawAnswer);
+			}
 		}
+		newMathProblem.setLawAnswers(lawAnswers);
 		newMathProblem.setNumberMark(Integer.valueOf(mathProblemTextArea[15].getText().trim()));
 		return mathProblem = newMathProblem;
 	}
@@ -180,7 +187,7 @@ public class MathProblemUI implements QuestionUI {
 		totMark += mathProblem.getLawMark();
 		for (int i = 0; i < mathProblem.getLawAnswers().size(); ++i) {
 			try {
-				studentAnswer = Integer.parseInt(mathProblemTextArea[i + 9].getText().trim());
+				studentAnswer = Integer.parseInt(mathProblemTextArea[14 - i].getText().trim());
 			} catch (NumberFormatException e) {
 				studentAnswer = -1;
 			}

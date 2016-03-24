@@ -21,9 +21,6 @@ public class TrueOrFalse extends Question {
 	@Column(name = "answer")
 	private String answer;
 
-	@Column(name = "description")
-	private String description;
-
 	public int getMark() {
 		return mark;
 	}
@@ -42,14 +39,6 @@ public class TrueOrFalse extends Question {
 
 	public void setAnswer(String answer) {
 		this.answer = answer;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public QuestionUI getQuestionUI() {

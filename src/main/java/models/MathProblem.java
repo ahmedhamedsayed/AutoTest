@@ -2,12 +2,17 @@ package models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import repositories.MathProblemRepository;
 import repositories.QuestionRepository;
@@ -28,10 +33,14 @@ public class MathProblem extends Question {
 	@Column(name = "answer")
 	private int answer;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "mathProblem")
+	@Fetch(FetchMode.SELECT)
+	@OneToMany(mappedBy = "mathProblem", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+	@OrderBy("id ASC")
 	private List<Law> laws;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "mathProblem")
+	@Fetch(FetchMode.SELECT)
+	@OneToMany(mappedBy = "mathProblem", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+	@OrderBy("id ASC")
 	private List<LawAnswer> lawAnswers;
 
 	public int getLawMark() {

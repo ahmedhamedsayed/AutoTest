@@ -19,10 +19,10 @@ public class ConnectPair {
 	private int id;
 
 	@Column(name = "first_description")
-	private String firstDescription;
+	private String firstDescription = "";
 
 	@Column(name = "second_description")
-	private String secondDescription;
+	private String secondDescription = "";
 
 	@Column(name = "answer")
 	private Integer answer;

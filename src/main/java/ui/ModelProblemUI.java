@@ -43,11 +43,12 @@ public class ModelProblemUI implements QuestionUI {
 		panel = Panel.create(dim);
 		new ModelProblemDimension(screenWidth, screenHeight);
 
+		JLabel[] label = new JLabel[3];
 		for (int i = 0; i < 3; ++i) {
 			Dimension curLabelDimension = ModelProblemDimension.labelDimension[i];
 			String curLabelName = ModelProblemLabelPath.labelName[i];
-			JLabel label = Label.label(curLabelDimension, curLabelName);
-			panel.add(label);
+			label[i] = Label.label(curLabelDimension, curLabelName);
+			panel.add(label[i]);
 		}
 
 		modelTextArea = new JTextArea[textAreaCounter];
