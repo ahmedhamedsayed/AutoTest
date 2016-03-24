@@ -21,6 +21,9 @@ public class ModelProblemEntry {
 	@Column(name = "row")
 	private int row;
 
+	@Column(name = "col")
+	private int col;
+
 	@Column(name = "description")
 	private String description;
 
@@ -45,6 +48,14 @@ public class ModelProblemEntry {
 
 	public void setRow(int row) {
 		this.row = row;
+	}
+
+	public int getCol() {
+		return col;
+	}
+
+	public void setCol(int col) {
+		this.col = col;
 	}
 
 	public String getDescription() {

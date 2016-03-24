@@ -87,8 +87,8 @@ public class TrueOrFalseUI implements QuestionUI {
 			textArea.setText("");
 	}
 
-	public void convertToUI(Question questionModel) {
-		trueOrFalse = (TrueOrFalse) questionModel;
+	public void convertToUI(Question question) {
+		trueOrFalse = (TrueOrFalse) question;
 		trueOrFalseTextArea[0].setText(trueOrFalse.getDescription());
 		trueOrFalseTextArea[1].setText(String.valueOf(trueOrFalse.getMark()));
 		trueOrFalseTextArea[2].setText(trueOrFalse.getAnswer());		

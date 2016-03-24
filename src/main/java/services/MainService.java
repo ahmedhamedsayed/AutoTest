@@ -216,6 +216,30 @@ public class MainService extends JFrame {
 		CompleteService.getInstance().completeBack();
 	}
 
+	public void connectDone() {
+		ConnectService.getInstance().connectDone();
+	}
+
+	public void connectBack() {
+		ConnectService.getInstance().connectBack();
+	}
+
+	public void mathProblemDone() {
+		MathProblemService.getInstance().mathProblemDone();
+	}
+
+	public void mathProblemBack() {
+		MathProblemService.getInstance().mathProblemBack();
+	}
+
+	public void modelProblemDone() {
+		ModelProblemService.getInstance().modelProblemDone();
+	}
+
+	public void modelProblemBack() {
+		ModelProblemService.getInstance().modelProblemBack();
+	}
+
 	public void trueOrFalseDone() {
 		TrueOrFalseService.getInstance().trueOrFalseDone();
 	}

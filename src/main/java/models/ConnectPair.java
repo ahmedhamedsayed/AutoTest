@@ -18,11 +18,14 @@ public class ConnectPair {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	@Column(name = "answer")
-	private String answer;
+	@Column(name = "first_description")
+	private String firstDescription;
 
-	@Column(name = "description")
-	private String description;
+	@Column(name = "second_description")
+	private String secondDescription;
+
+	@Column(name = "answer")
+	private Integer answer;
 
 	@ManyToOne
 	@JoinColumn(name = "question_id")
@@ -36,20 +39,28 @@ public class ConnectPair {
 		this.id = id;
 	}
 
-	public String getAnswer() {
+	public String getFirstDescription() {
+		return firstDescription;
+	}
+
+	public void setFirstDescription(String firstDescription) {
+		this.firstDescription = firstDescription;
+	}
+
+	public String getSecondDescription() {
+		return secondDescription;
+	}
+
+	public void setSecondDescription(String secondDescription) {
+		this.secondDescription = secondDescription;
+	}
+
+	public Integer getAnswer() {
 		return answer;
 	}
 
-	public void setAnswer(String answer) {
+	public void setAnswer(Integer answer) {
 		this.answer = answer;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public Connect getConnect() {

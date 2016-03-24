@@ -2,7 +2,6 @@ package ui;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -35,7 +34,6 @@ public class ChooseUI implements QuestionUI {
 	private JButton[] button;
 	private TimerCountDown timerCountDown;
 	private Choose choose;
-	private int correctChoise;
 	private final int textAreaCounter = 9, buttonsCounter = 4;
 
 	private void buildPanel() {
@@ -77,9 +75,8 @@ public class ChooseUI implements QuestionUI {
 	}
 
 	public static synchronized QuestionUI getInstance() {
-		if (chooseUI == null) {
+		if (chooseUI == null)
 			return chooseUI = new ChooseUI();
-		}
 		return chooseUI;
 	}
 
@@ -94,24 +91,14 @@ public class ChooseUI implements QuestionUI {
 			textArea.setText("");
 	}
 
-	public void convertToUI(Question questionModel) {
-		choose = (Choose) questionModel;
+	public void convertToUI(Question question) {
+		choose = (Choose) question;
 		chooseTextArea[0].setText(choose.getDescription());
 		chooseTextArea[1].setText(String.valueOf(choose.getMark()));
 		chooseTextArea[2].setText(String.valueOf(choose.getAnswer()));
 
-		List<Integer> indexes = new ArrayList<Integer>();
-		for (int i = 0; i < choose.getChoices().size(); ++i)
-			indexes.add(i);
-
-		Random random = new Random();
-		boolean isStudent = QuestionService.getInstance().isStudent();
 		for (int i = 0; i < choose.getChoices().size(); ++i) {
-			int index = (isStudent) ? random.nextInt(indexes.size()) : 0;
-			if (indexes.get(index) + 1 == choose.getAnswer())
-				correctChoise = i + 1;
-			chooseTextArea[i + 3].setText(choose.getChoices().get(indexes.get(index)).getDescription());
-			indexes.remove(index);
+			chooseTextArea[i + 3].setText(choose.getChoices().get(i).getDescription());
 		}
 	}
 
@@ -176,10 +163,10 @@ public class ChooseUI implements QuestionUI {
 	public int getMark() {
 		int studentChoise;
 		try {
-			studentChoise = Integer.parseInt(chooseTextArea[2].getText());
+			studentChoise = Integer.parseInt(chooseTextArea[2].getText().trim());
 		} catch (NumberFormatException e) {
 			studentChoise = -1;
 		}
-		return (studentChoise == correctChoise) ? choose.getMark() : 0;
+		return (studentChoise == choose.getAnswer()) ? choose.getMark() : 0;
 	}
 }

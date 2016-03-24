@@ -11,7 +11,7 @@ public interface QuestionUI {
 	
     void resetTextArea();
     
-    void convertToUI(Question questionModel);
+    void convertToUI(Question question);
     
     JPanel getPanel();
 

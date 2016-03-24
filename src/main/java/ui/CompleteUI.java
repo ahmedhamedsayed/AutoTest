@@ -87,8 +87,8 @@ public class CompleteUI implements QuestionUI {
 			textArea.setText("");
 	}
 
-	public void convertToUI(Question questionModel) {
-		complete = (Complete) questionModel;
+	public void convertToUI(Question question) {
+		complete = (Complete) question;
 		completeTextArea[0].setText(complete.getDescription());
 		completeTextArea[1].setText(String.valueOf(complete.getMark()));
 		completeTextArea[2].setText(complete.getAnswer());		
