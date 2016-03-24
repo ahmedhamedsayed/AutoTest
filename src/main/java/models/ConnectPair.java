@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "connectpair")
+@Table(name = "connect_pair")
 public class ConnectPair {
 
 	@Id

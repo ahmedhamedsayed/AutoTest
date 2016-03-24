@@ -16,10 +16,10 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	@Column(name = "studentId")
+	@Column(name = "student_id")
 	private String studentId;
 	
-	@Column(name = "examId")
+	@Column(name = "exam_id")
 	private Integer examId;
 	
 	@Column(name = "mark")

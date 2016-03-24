@@ -11,7 +11,7 @@ import ui.QuestionUI;
 import ui.TrueOrFalseUI;
 
 @Entity
-@Table(name = "trueorfalse")
+@Table(name = "true_or_false")
 @PrimaryKeyJoinColumn(name = "question_id")
 public class TrueOrFalse extends Question {
 

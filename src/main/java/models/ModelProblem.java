@@ -15,7 +15,7 @@ import ui.ModelProblemUI;
 import ui.QuestionUI;
 
 @Entity
-@Table(name = "modelproblem")
+@Table(name = "model_problem")
 @PrimaryKeyJoinColumn(name = "question_id")
 public class ModelProblem extends Question {
 

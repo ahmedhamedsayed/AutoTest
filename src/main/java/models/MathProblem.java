@@ -15,14 +15,14 @@ import ui.MathProblemUI;
 import ui.QuestionUI;
 
 @Entity
-@Table(name = "mathproblem")
+@Table(name = "math_problem")
 @PrimaryKeyJoinColumn(name = "question_id")
 public class MathProblem extends Question {
 
-	@Column(name = "lawmark")
+	@Column(name = "law_mark")
 	private int lawMark;
 
-	@Column(name = "numbermark")
+	@Column(name = "number_mark")
 	private int numberMark;
 
 	@Column(name = "answer")
