@@ -98,8 +98,8 @@ public class ModelProblemUI implements QuestionUI {
 		for (int i = 0; i < modelProblem.getModelProblemEntries().size(); ++i) {
 			ModelProblemEntry modelProblemEntry = modelProblem.getModelProblemEntries().get(i);
 			int r = modelProblemEntry.getRow(), c = modelProblemEntry.getCol();
-			modelTextArea[6 * r + c + 2].setText(modelProblemEntry.getDescription());
-			modelTextArea[6 * r + c + 3].setText(modelProblemEntry.getAnswer());
+			modelTextArea[6 * r + c + 3].setText(modelProblemEntry.getDescription());
+			modelTextArea[6 * r + c + 2].setText(modelProblemEntry.getAnswer());
 		}
 	}
 
@@ -123,8 +123,8 @@ public class ModelProblemUI implements QuestionUI {
 
 	private JPanel getPanelForStudent(boolean inEnd) {
 		for (int i = 0; i < this.textAreaCounter; ++i) {
-			this.modelTextArea[i].setEditable(i >= 2 && i % 2 == 1);
-			if (i >= 2 && i % 2 == 1)
+			this.modelTextArea[i].setEditable(i >= 2 && i % 2 == 0);
+			if (i >= 2 && i % 2 == 0)
 				this.modelTextArea[i].setText("");
 		}
 		for (int i = 0; i < this.buttonsCounter; ++i)
@@ -152,8 +152,8 @@ public class ModelProblemUI implements QuestionUI {
 		List<ModelProblemEntry> modelProblemEntries = new ArrayList<ModelProblemEntry>();
 		for (int i = 0; i < 6; ++i)
 			for (int j = 0; j < 6; j += 2) {
-				String description = modelTextArea[6 * i + j + 2].getText().trim();
-				String answer = modelTextArea[6 * i + j + 3].getText().trim();
+				String description = modelTextArea[6 * i + j + 3].getText().trim();
+				String answer = modelTextArea[6 * i + j + 2].getText().trim();
 				if ("".equals(description) || "".equals(answer))
 					continue;
 				ModelProblemEntry modelProblemEntry = new ModelProblemEntry();
@@ -172,7 +172,7 @@ public class ModelProblemUI implements QuestionUI {
 		for (int i = 0; i < modelProblem.getModelProblemEntries().size(); ++i) {
 			ModelProblemEntry modelProblemEntry = modelProblem.getModelProblemEntries().get(i);
 			int r = modelProblemEntry.getRow(), c = modelProblemEntry.getCol();
-			String studentAnswer = modelTextArea[6 * r + c + 3].getText().trim();
+			String studentAnswer = modelTextArea[6 * r + c + 2].getText().trim();
 			totMark += modelProblemEntry.getAnswer().equals(studentAnswer) ? modelProblem.getMark() : 0;
 		}
 		return totMark;

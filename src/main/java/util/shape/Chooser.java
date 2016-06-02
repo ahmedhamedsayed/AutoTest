@@ -9,7 +9,11 @@ public class Chooser {
 		chooser.setDialogTitle(chooserTitle);
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		chooser.showSaveDialog(null);
-		return chooser.getSelectedFile().getAbsolutePath();
+		try {
+			return chooser.getSelectedFile().getAbsolutePath();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 }

@@ -35,7 +35,10 @@ public class TeacherService {
 
 	public void generateFinalSheet() {
 		String path = Chooser.chooser(Message.FINAL_SHEET_PATH_CHOOSER_MESSAGE.getValue());
-		HashMap<Integer, HashMap<String, Integer>> exams = new HashMap<Integer, HashMap<String,Integer>>();
+		if (path == null) {
+			return;
+		}
+		HashMap<Integer, HashMap<String, Integer>> exams = new HashMap<Integer, HashMap<String, Integer>>();
 		File folder = new File(path);
 		File[] databases = folder.listFiles();
 		for (int i = 0; i < databases.length; i++) {
@@ -59,13 +62,13 @@ public class TeacherService {
 			}
 		}
 		for (Entry<Integer, HashMap<String, Integer>> entry : exams.entrySet()) {
-		    Integer examId = entry.getKey();
-		    Exam exam = ExamRepository.getInstance().findOneById(examId);
-		    HashMap<String, Integer> examStudents = entry.getValue();
-		    writeSheet(exam, examStudents, path);
+			Integer examId = entry.getKey();
+			Exam exam = ExamRepository.getInstance().findOneById(examId);
+			HashMap<String, Integer> examStudents = entry.getValue();
+			writeSheet(exam, examStudents, path);
 		}
 	}
-	
+
 	private void writeSheet(Exam exam, HashMap<String, Integer> examStudents, String path) {
 		float[] columnWidths = { 1f, 0.7f, 0.7f };
 		try {
@@ -88,7 +91,7 @@ public class TeacherService {
 				table.addCell(markCell);
 				table.addCell(idCell);
 			}
-			
+
 			document.add(table);
 			document.close();
 			writer.close();
@@ -96,7 +99,7 @@ public class TeacherService {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void buildPDFHeader(PdfPTable table, Integer examMark) {
 		String examNameCellText = Message.FINAL_SHEET_HEADER_EXAM_NAME.getValue();
 		PdfPCell headerExamNameCell = PDFCell.pdfCell(11, true, examNameCellText, 20f);
